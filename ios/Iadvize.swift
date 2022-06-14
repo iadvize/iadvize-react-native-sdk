@@ -1,5 +1,40 @@
 import IAdvizeConversationSDK
 
+extension ConversationChannel {
+    static func fromString(_ channel: String) -> ConversationChannel {
+        switch channel.uppercased() {
+        case "VIDEO":
+            return .video
+        case "CHAT":
+            return .chat
+        default:
+            return .chat
+        }
+    }
+}
+
+extension NavigationOption {
+    static func fromString(_ navigationOption: String, uuid: String, channel: String) -> NavigationOption {
+        switch navigationOption.uppercased() {
+            case "CLEAR":
+                return .clearActiveRule
+            case "KEEP":
+                return .keepActiveRule
+            case "NEW":
+                guard let uuid = UUID(uuidString: uuid) else {
+                    print("Unable to activate targeting rule: targeting rule id not valid")
+                    return .clearActiveRule
+                }
+                let channel = ConversationChannel.fromString(channel)
+                let targetingRule = TargetingRule(id: uuid, conversationChannel: channel)
+                return .activateNewRule(targetingRule: targetingRule)
+            default:
+                return .clearActiveRule
+        }
+
+    }
+}
+
 @objc(Iadvize)
 class Iadvize: RCTEventEmitter {
     
@@ -61,12 +96,17 @@ class Iadvize: RCTEventEmitter {
         IAdvizeSDK.shared.targetingController.language = .custom(value: Language(rawValue: language.lowercased()) ?? .fr)
     }
     
-    @objc(activateTargetingRule:)
-    func activateTargetingRule(value: String) -> Void {
+    @objc(activateTargetingRule:channel:)
+    func activateTargetingRule(uuid: String, channel: String) -> Void {
         DispatchQueueHelpers.runOnMainThread {
-            print("iAdvize iOS SDK - activateTargetingRule called with \(value)")
-            let uuid = UUID(uuidString: value)
-            IAdvizeSDK.shared.targetingController.activateTargetingRule(targetingRuleId: uuid!)
+            print("iAdvize iOS SDK - activateTargetingRule: \(uuid) - \(channel)")
+            guard let uuid = UUID(uuidString: uuid) else {
+                print("Unable to activate targeting rule: targeting rule id not valid")
+                return
+            }
+            let channel = ConversationChannel.fromString(channel)
+            let targetingRule = TargetingRule(id: uuid, conversationChannel: channel)
+            IAdvizeSDK.shared.targetingController.activateTargetingRule(targetingRule: targetingRule)
         }
     }
     
@@ -84,11 +124,12 @@ class Iadvize: RCTEventEmitter {
         }
     }
     
-    @objc
-    func registerUserNavigation() -> Void {
+    @objc(registerUserNavigation:uuid:channel:)
+    func registerUserNavigation(navigationOption: String, uuid: String, channel: String) -> Void {
         DispatchQueueHelpers.runOnMainThread {
             print("iAdvize iOS SDK - registerUserNavigation called")
-            IAdvizeSDK.shared.targetingController.registerUserNavigation()
+            let navOption = NavigationOption.fromString(navigationOption, uuid: uuid, channel: channel)
+            IAdvizeSDK.shared.targetingController.registerUserNavigation(navigationOption: navOption)
         }
     }
     
@@ -151,17 +192,17 @@ class Iadvize: RCTEventEmitter {
     
     //MARK: Chatbox
     
-    @objc(setDefaultChatButton:)
-    func setDefaultChatButton(active: Bool) -> Void {
+    @objc(setDefaultFloatingButton:)
+    func setDefaultFloatingButton(active: Bool) -> Void {
         DispatchQueueHelpers.runOnMainThread {
-            IAdvizeSDK.shared.chatboxController.useDefaultChatButton = true
+            IAdvizeSDK.shared.chatboxController.useDefaultFloatingButton = true
         }
     }
     
-    @objc(setChatButtonPosition:bottomMargin:)
-    func setChatButtonPosition(leftMargin: NSNumber, bottomMargin: NSNumber) -> Void {
+    @objc(setFloatingButtonPosition:bottomMargin:)
+    func setFloatingButtonPosition(leftMargin: NSNumber, bottomMargin: NSNumber) -> Void {
         DispatchQueueHelpers.runOnMainThread {
-            IAdvizeSDK.shared.chatboxController.setChatButtonPosition(leftMargin: Double(leftMargin), bottomMargin: Double(bottomMargin))
+            IAdvizeSDK.shared.chatboxController.setFloatingButtonPosition(leftMargin: Double(leftMargin), bottomMargin: Double(bottomMargin))
         }
     }
     

@@ -1,4 +1,4 @@
-import type { ApplicationMode, LogLevel } from '../enums';
+import type { ApplicationMode, ConversationChannel, LogLevel, NavigationOption } from '../enums';
 import type { ChatboxConfiguration, Transaction } from '.';
 
 export type IadvizeType = {
@@ -8,15 +8,15 @@ export type IadvizeType = {
     userId: string,
     gdprURL: string
   ): Promise<boolean>;
-  // Logging
+  // Logging 
   setLogLevel(logLevel: LogLevel): void;
   // Targeting
   setLanguage(language: string): void;
-  activateTargetingRule(uuid: string): void;
+  activateTargetingRule(uuid: string, conversationChannel: ConversationChannel): void;
   isActiveTargetingRuleAvailable(): number; // iOS Only
   setOnActiveTargetingRuleAvailabilityListener(): void;
   onActiveTargetingRuleAvailabilityUpdatedListener: any;
-  registerUserNavigation(): void;
+  registerUserNavigation(navigationOption: NavigationOption, uuid: string, conversationChannel: ConversationChannel): void;
   // Conversation
   hasOngoingConversation(): number;
   setConversationListener(): void;
@@ -28,8 +28,8 @@ export type IadvizeType = {
   enablePushNotifications(): Promise<boolean>;
   disablePushNotifications(): Promise<boolean>;
   // Chatbox
-  setDefaultChatButton(active: boolean): void;
-  setChatButtonPosition(leftMargin: number, bottomMargin: number): void;
+  setDefaultFloatingButton(active: boolean): void;
+  setFloatingButtonPosition(leftMargin: number, bottomMargin: number): void;
   setChatboxConfiguration(configuration: ChatboxConfiguration): void;
   // Transaction
   registerTransaction(transaction: Transaction): void;

@@ -17,12 +17,12 @@ The iAdvize React native SDK use iAdvize iOS and Android SDK.
 For Android requirements :
 | Minimum Android Version | Kotlin Version |
 | ----------------------- | -------------- |
-| API 19                  | 1.5.20         |
+| API 21                  | 1.6.21         |
 
 For iOS requirements :
 | iOS | Xcode |
 | ----------------------- | -------------- |
-| 12.0 or higher       | 12.5         |
+| 12.0 or higher       | 13.X         |
 
 ## Documentation
 
@@ -89,10 +89,9 @@ configurations {
 
 dependencies {
   // If you use AndroidX you can use latest SDK
-  implementation 'com.iadvize:iadvize-sdk:2.1.0-beta6'
+  implementation 'com.iadvize:iadvize-sdk:2.5.1'
 }
 ```
-> :warning: From version 1.6.0 the SDK uses AndroidX.
 
 #### initiate
 
@@ -114,7 +113,7 @@ class App : Application() {
 You need to import the SDK.
 
 ```js
-import Iadvize from 'iadvize-react-native-sdk';
+import Iadvize from '@iadvize-oss/iadvize-react-native-sdk';
 ```
 
 ### Activation
@@ -123,7 +122,7 @@ To activate the SDK you must use the **activate** function. You also have access
 
 ```js
 try {
-  await Iadvize.activate(projectId, 'userId', 'legalInfoUrl');
+  await Iadvize.activate(projectId, 'userId', 'legalInfoUrl' OR null);
   console.log('iAdvize SDK activated');
 } catch (e) {
   console.log('iAdvize SDK not activated');
@@ -177,7 +176,7 @@ export enum LogLevel {
 By default, the SDK will use the device language for **targeting a conversation**. With this variable you can specify the language you want to use for targetting:
 
 ```js
-Iadvize.setLanguage('FR');
+Iadvize.setLanguage('fr');
 ```
 The parameter passed to the function is a `string` parameter.
 > :warning: This `language` property is NOT intended to change the language displayed in the SDK.
@@ -187,7 +186,9 @@ The parameter passed to the function is a `string` parameter.
 For the iAdvize SDK to work, you have to setup an active targeting rule. To do so, you can call the following method:
 
 ```js
-Iadvize.activateTargetingRule(targetingRuleId: UUID);
+Iadvize.activateTargetingRule("YOUR_TARGETING_RULE_UUID", ConversationChannel.CHAT);
+// OR
+Iadvize.activateTargetingRule("YOUR_TARGETING_RULE_UUID", ConversationChannel.VIDEO);
 ```
 
 #### Targeting rule availability
@@ -212,10 +213,14 @@ IadvizeListeners.onActiveTargetingRuleAvailabilityUpdated?.(function (
 
 #### Follow user navigation
 
-To allow iAdvize statistics to be processed you need to inform the SDK when the user navigates through your app. To do so, just call:
+To allow iAdvize statistics to be processed you need to inform the SDK when the user navigates through the screens your app, you will have to call `registerUserNavigation` and pass a navigation option which allows you to clear, keep or activate a new targeting rule.
 
 ```js
-Iadvize.registerUserNavigation()
+Iadvize.registerUserNavigation(NavigationOption.clear, "", "");
+// OR
+Iadvize.registerUserNavigation(NavigationOption.keep, "", ConversationChannel.CHAT);
+// OR
+Iadvize.registerUserNavigation(NavigationOption.new, "YOUR_TARGETING_RULE_UUID", ConversationChannel.CHAT/ConversationChannel.VIDEO);
 ```
 
 ### Conversation
@@ -254,7 +259,7 @@ To receive push notification when a message is sent to the visitor, you must reg
 Iadvize.registerPushToken('the_device_push_token', ApplicationMode.DEV);
 ```
 
-Possible values of `ApplicationMode` are :
+Possible values of `ApplicationMode` are (useful for iOS only) :
 ```js
 export enum ApplicationMode {
   DEV = 'dev',
@@ -293,16 +298,16 @@ When the active targeting rule is available, a chat button is displayed to invit
 You can decide to let the SDK manage the chat button visibility or control it yourself using the following flag:
 
 ```js
-Iadvize.setDefaultChatButton(boolean);
+Iadvize.setDefaultFloatingButton(boolean);
 ```
 
 ##### Default chat button
-If `setDefaultChatButton == true` the SDK will use the iAdvize default chat button, manage its visibility, and open the chatbox when user presses it.
+If `setDefaultFloatingButton == true` the SDK will use the iAdvize default chat button, manage its visibility, and open the chatbox when user presses it.
 
 The default chat button is anchored to the bottom-left of your screen, you can change its position using:
 
 ```js
-Iadvize.setChatButtonPosition(leftMargin, bottomMargin);
+Iadvize.setFloatingButtonPosition(leftMargin, bottomMargin);
 ```
 
 #### Customization

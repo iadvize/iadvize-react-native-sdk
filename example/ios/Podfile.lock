@@ -1,17 +1,16 @@
 PODS:
-  - Alamofire (5.4.3)
-  - AlamofireImage (4.2.0):
-    - Alamofire (~> 5.4)
   - Apollo (0.36.0):
     - Apollo/Core (= 0.36.0)
   - Apollo/Core (0.36.0)
-  - Base64 (1.1.2)
+  - Apollo/SQLite (0.36.0):
+    - Apollo/Core
+    - SQLite.swift (~> 0.12.2)
   - boost-for-react-native (1.63.0)
   - CocoaAsyncSocket (7.6.5)
-  - CocoaLumberjack (3.7.2):
-    - CocoaLumberjack/Core (= 3.7.2)
-  - CocoaLumberjack/Core (3.7.2)
-  - CocoaLumberjack/Swift (3.7.2):
+  - CocoaLumberjack (3.7.4):
+    - CocoaLumberjack/Core (= 3.7.4)
+  - CocoaLumberjack/Core (3.7.4)
+  - CocoaLumberjack/Swift (3.7.4):
     - CocoaLumberjack/Core
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.63.4)
@@ -33,18 +32,18 @@ PODS:
     - glog
   - Gifu (3.3.1)
   - glog (0.3.5)
-  - iAdvize (2.1.0-beta1):
-    - AlamofireImage (~> 4.2.0)
+  - iAdvize (2.5.0):
     - Apollo (~> 0.36.0)
+    - Apollo/SQLite
     - Gifu (~> 3.3.0)
-    - JWT (~> 3.0.0-beta.12)
+    - JWTDecode (~> 2.6.3)
     - SwiftGraylog (~> 1.1.1)
+    - TwilioVideo (~> 4.6)
     - XMPPFramework/Swift (~> 4.0.0)
   - iadvize-react-native-sdk (1.0.0):
-    - iAdvize (= 2.1.0-beta1)
+    - iAdvize (= 2.5.0)
     - React-Core
-  - JWT (3.0.0-beta.14):
-    - Base64 (~> 1.1.2)
+  - JWTDecode (2.6.3)
   - KissXML (5.3.1):
     - KissXML/All (= 5.3.1)
   - KissXML/Additions (5.3.1):
@@ -280,7 +279,11 @@ PODS:
     - React-Core (= 0.63.4)
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
+  - SQLite.swift (0.12.2):
+    - SQLite.swift/standard (= 0.12.2)
+  - SQLite.swift/standard (0.12.2)
   - SwiftGraylog (1.1.1)
+  - TwilioVideo (4.6.3)
   - XMPPFramework/default (4.0.0):
     - CocoaAsyncSocket (~> 7.6)
     - CocoaLumberjack
@@ -324,19 +327,18 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - Alamofire
-    - AlamofireImage
     - Apollo
-    - Base64
     - boost-for-react-native
     - CocoaAsyncSocket
     - CocoaLumberjack
     - Gifu
     - iAdvize
-    - JWT
+    - JWTDecode
     - KissXML
     - libidn
+    - SQLite.swift
     - SwiftGraylog
+    - TwilioVideo
     - XMPPFramework
 
 EXTERNAL SOURCES:
@@ -396,22 +398,19 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
-  AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
   Apollo: a8dbf1a55e8860bfbe3e4274919721d102c85413
-  Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
-  CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
+  CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   Gifu: 416d4e38c4c2fed012f019e0a1d3ffcb58e5b842
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
-  iAdvize: 28e970b1f07529ae538f6fb83cac078787241866
-  iadvize-react-native-sdk: 91a70765817ccb2204d3fa18f71f5b9ba554f91a
-  JWT: ef71dfb03e1f842081e64dc42eef0e164f35d251
+  iAdvize: f86437c2d8c332601496841642485431e0dafe90
+  iadvize-react-native-sdk: 0b5cb72bc76fadcb7541cf05a69c3b803b2fc350
+  JWTDecode: 33e5e26e5ddbd21b2065820894c08fef0cad9509
   KissXML: 5c8e0f2e8b9f071d3e1ae123dec3eb5da615c10c
   libidn: e4576a956b797c584c77aaedfc6e3dd639b61bdc
   RCTRequired: 082f10cd3f905d6c124597fd1c14f6f2655ff65e
@@ -434,10 +433,12 @@ SPEC CHECKSUMS:
   React-RCTText: 5c51df3f08cb9dedc6e790161195d12bac06101c
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
+  SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   SwiftGraylog: 4fffb151492baa199e708548ece16f4cf1c75413
+  TwilioVideo: 4afaac028c5886f2f3b313a9fcc146a6b7ca34e2
   XMPPFramework: 5d31ff9f73dce031b24bc49bcf88093627a3a86e
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
 PODFILE CHECKSUM: 8bbe63d7b04682fc645ce8819075c5d05104e589
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2
