@@ -7,23 +7,35 @@ import android.util.Log
 import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
 import com.iadvize.conversation.sdk.IAdvizeSDK
-import com.iadvize.conversation.sdk.controller.conversation.ConversationListener
-import com.iadvize.conversation.sdk.controller.targeting.TargetingListener
-import com.iadvize.conversation.sdk.model.IAdvizeSDKCallback
-import com.iadvize.conversation.sdk.model.auth.AuthenticationOption
-import com.iadvize.conversation.sdk.model.configuration.ChatboxConfiguration
-import com.iadvize.conversation.sdk.model.conversation.IncomingMessageAvatar
-import com.iadvize.conversation.sdk.model.gdpr.GDPREnabledOption
-import com.iadvize.conversation.sdk.model.gdpr.GDPROption
-import com.iadvize.conversation.sdk.model.language.SDKLanguageOption
-import com.iadvize.conversation.sdk.model.transaction.Transaction
+import com.iadvize.conversation.sdk.feature.conversation.ConversationListener
+import com.iadvize.conversation.sdk.feature.targeting.TargetingListener
+import com.iadvize.conversation.sdk.IAdvizeSDK.Callback
+import com.iadvize.conversation.sdk.feature.authentication.AuthenticationOption
+import com.iadvize.conversation.sdk.feature.chatbox.ChatboxConfiguration
+import com.iadvize.conversation.sdk.feature.conversation.IncomingMessageAvatar
+import com.iadvize.conversation.sdk.feature.conversation.ConversationChannel
+import com.iadvize.conversation.sdk.feature.conversation.OngoingConversation
+import com.iadvize.conversation.sdk.feature.defaultfloatingbutton.*
+import com.iadvize.conversation.sdk.feature.gdpr.GDPREnabledOption
+import com.iadvize.conversation.sdk.feature.gdpr.GDPROption
+import com.iadvize.conversation.sdk.feature.targeting.LanguageOption
+import com.iadvize.conversation.sdk.feature.targeting.TargetingRule
+import com.iadvize.conversation.sdk.feature.targeting.NavigationOption
+import com.iadvize.conversation.sdk.feature.transaction.Transaction
 import com.iadvize.conversation.sdk.type.Language
-import com.iadvize.conversation.sdk.utils.logger.Logger
+import com.iadvize.conversation.sdk.feature.logger.Logger
 import com.iadvize.conversation.sdk.type.Currency
 import java.net.URI
 import java.net.URL
 import java.util.*
 import javax.annotation.Nullable
+
+inline fun <T> tryOrNull(f: () -> T) =
+    try {
+        f()
+    } catch (_: Exception) {
+        null
+    }
 
 
 class IadvizeModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
@@ -37,17 +49,17 @@ class IadvizeModule(reactContext: ReactApplicationContext) : ReactContextBaseJav
      */
 
     @ReactMethod
-    fun activate(projectId: Int, userId: String, legalInfoUrl: String, promise: Promise) {
+    fun activate(projectId: Int, userId: String, legalInfoUrl: String?, promise: Promise) {
       Log.d("iAdvize SDK activate", "called")
 
-      var legalUrl = URI(legalInfoUrl)
-      val gdprOption = if (legalUrl != null) GDPROption.Enabled(GDPREnabledOption.LegalUrl(legalUrl)) else GDPROption.Disabled()
+      var legalUrl = tryOrNull { URI(legalInfoUrl) }
+      val gdprOption = if (legalUrl != null) GDPROption.Enabled(GDPREnabledOption.LegalUrl(legalUrl)) else GDPROption.Disabled
 
       IAdvizeSDK.activate(
         projectId,
         AuthenticationOption.Simple(userId),
         gdprOption,
-        object : IAdvizeSDKCallback {
+        object : Callback {
           override fun onSuccess() {
             Log.d("iAdvize SDK onSuccess", "onSuccess")
             promise.resolve(true)
@@ -77,8 +89,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) : ReactContextBaseJav
         1 -> return Logger.Level.INFO
         2 -> return Logger.Level.WARNING
         3 -> return Logger.Level.ERROR
-        4 -> return Logger.Level.SUCCESS
-        else -> return Logger.Level.VERBOSE
+        else -> return Logger.Level.WARNING
       }
     }
 
@@ -89,15 +100,27 @@ class IadvizeModule(reactContext: ReactApplicationContext) : ReactContextBaseJav
     @ReactMethod
     fun setLanguage(language: String) {
       Log.d("iAdvize SDK setLanguage", language)
-      var language = Language.safeValueOf(language);
-      IAdvizeSDK.targetingController.language = SDKLanguageOption.Custom(language)
+      var lang = tryOrNull { Language.valueOf(language) } ?: Language.en
+      IAdvizeSDK.targetingController.language = LanguageOption.Custom(lang)
     }
 
     @ReactMethod
-    fun activateTargetingRule(uuid: String) {
+    fun activateTargetingRule(uuid: String, channel: String) {
       var value = UUID.fromString(uuid)
-      Log.d("iAdvize SDK set uuid", value.toString())
-      IAdvizeSDK.targetingController.activateTargetingRule(value)
+      Log.d("iAdvize SDK - activate targeting rule", value.toString())
+
+      IAdvizeSDK.targetingController.activateTargetingRule(TargetingRule(
+          value,
+          conversationChannelFrom(channel)
+      ))
+    }
+
+    fun conversationChannelFrom(value: String) : ConversationChannel {
+      when (value) {
+        "chat" -> return ConversationChannel.CHAT
+        "video" -> return ConversationChannel.VIDEO
+        else -> return ConversationChannel.CHAT
+      }
     }
 
     @ReactMethod(isBlockingSynchronousMethod = true)
@@ -119,9 +142,19 @@ class IadvizeModule(reactContext: ReactApplicationContext) : ReactContextBaseJav
     }
 
     @ReactMethod
-    fun registerUserNavigation() {
+    fun registerUserNavigation(navigationOption: String, uuid: String, channel: String) {
       Log.d("iAdvize SDK", "registerUserNavigation called")
-      IAdvizeSDK.targetingController.registerUserNavigation()
+
+      IAdvizeSDK.targetingController.registerUserNavigation(navigationOptionFrom(navigationOption, uuid, channel))
+    }
+
+    fun navigationOptionFrom(value: String, uuid: String, channel: String) : NavigationOption {
+      when(value) {
+        "clear" -> return NavigationOption.ClearActiveRule
+        "keep" -> return NavigationOption.KeepActiveRule
+        "new" -> return NavigationOption.ActivateNewRule(TargetingRule(UUID.fromString(uuid), conversationChannelFrom(channel)))
+        else -> return NavigationOption.ClearActiveRule
+      }
     }
 
     /*
@@ -131,7 +164,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) : ReactContextBaseJav
     @ReactMethod(isBlockingSynchronousMethod = true)
     fun hasOngoingConversation(): Boolean {
       Log.d("iAdvize SDK", "hasOngoingConversation called")
-      return IAdvizeSDK.conversationController.hasOngoingConversation()
+      return IAdvizeSDK.conversationController.ongoingConversation() != null
     }
 
     @ReactMethod
@@ -139,25 +172,28 @@ class IadvizeModule(reactContext: ReactApplicationContext) : ReactContextBaseJav
       Log.d("iAdvize SDK", "setConversationListener called")
 
       IAdvizeSDK.conversationController.listeners.add(object : ConversationListener {
-        override fun onOngoingConversationStatusChanged(hasOngoingConversation: Boolean) {
-          val result = Arguments.createMap()
-          result.putBoolean("hasOngoingConversation", hasOngoingConversation);
-          sendEvent(getReactApplicationContext(), "iadvize_onOngoingConversationStatusChanged", result);
-        }
+                override fun onOngoingConversationUpdated(ongoingConversation: OngoingConversation?) {
+                    Log.d("iAdvize SDK", "onOngoingConversationUpdated $ongoingConversation")
+                    val result = Arguments.createMap()
+                    result.putBoolean("hasOngoingConversation", ongoingConversation != null);
+                    sendEvent(getReactApplicationContext(), "iadvize_onOngoingConversationStatusChanged", result);
+                }
 
-        override fun onNewMessageReceived(content: String) {
-          val result = Arguments.createMap()
-          result.putString("content", content);
-          sendEvent(getReactApplicationContext(), "iadvize_onNewMessageReceived", result);
-        }
+                override fun onNewMessageReceived(content: String) {
+                    Log.d("iAdvize SDK", "onNewMessageReceived $content")
+                    val result = Arguments.createMap()
+                    result.putString("content", content);
+                    sendEvent(getReactApplicationContext(), "iadvize_onNewMessageReceived", result);
+                }
 
-        override fun handleClickedUrl(uri: Uri): Boolean {
-          val result = Arguments.createMap()
-          result.putString("uri", uri.toString());
-          sendEvent(getReactApplicationContext(), "iadvize_handleClickedUrl", result);
-          return true
-        }
-      })
+                override fun handleClickedUrl(uri: Uri): Boolean {
+                    Log.d("iAdvize SDK", "handleClickedUrl $uri")
+                    val result = Arguments.createMap()
+                    result.putString("uri", uri.toString());
+                    sendEvent(getReactApplicationContext(), "iadvize_handleClickedUrl", result);
+                    return true
+                }
+            })
     }
 
     private fun sendEvent(reactContext: ReactContext, eventName: String, @Nullable params: WritableMap) {
@@ -179,7 +215,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) : ReactContextBaseJav
 
     @ReactMethod
     fun enablePushNotifications(promise: Promise) {
-      IAdvizeSDK.notificationController.enablePushNotifications(object : IAdvizeSDKCallback {
+      IAdvizeSDK.notificationController.enablePushNotifications(object : Callback {
         override fun onSuccess() {
           promise.resolve(true)
         }
@@ -192,7 +228,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) : ReactContextBaseJav
 
     @ReactMethod
     fun disablePushNotifications(promise: Promise) {
-      IAdvizeSDK.notificationController.disablePushNotifications(object : IAdvizeSDKCallback {
+      IAdvizeSDK.notificationController.disablePushNotifications(object : Callback {
         override fun onSuccess() {
           promise.resolve(true)
         }
@@ -208,15 +244,27 @@ class IadvizeModule(reactContext: ReactApplicationContext) : ReactContextBaseJav
      */
 
     @ReactMethod
-    fun setDefaultChatButton(active: Boolean) {
-      Log.d("iAdvize SDK", "setDefaultChatButton called with " + active.toString())
-      IAdvizeSDK.chatboxController.useDefaultChatButton = true
+    fun setDefaultFloatingButton(active: Boolean) {
+      Log.d("iAdvize SDK", "setDefaultFloatingButton called with " + active.toString())
+      if (!active) {
+        IAdvizeSDK.defaultFloatingButtonController.setupDefaultFloatingButton(DefaultFloatingButtonOption.Disabled)
+      } else {
+        val configuration = DefaultFloatingButtonConfiguration()
+        val option = DefaultFloatingButtonOption.Enabled(configuration)
+        IAdvizeSDK.defaultFloatingButtonController.setupDefaultFloatingButton(option)
+      }
     }
 
     @ReactMethod
-    fun setChatButtonPosition(leftMargin: Int, bottomMargin: Int) {
-      Log.d("iAdvize SDK", "setChatButtonPosition called with " + leftMargin.toString())
-      IAdvizeSDK.chatboxController.setChatButtonPosition(leftMargin, bottomMargin)
+    fun setFloatingButtonPosition(leftMargin: Int, bottomMargin: Int) {
+      Log.d("iAdvize SDK", "setFloatingButtonPosition called with " + leftMargin.toString())
+
+      
+      val defaultMargins = DefaultFloatingButtonMargins()
+      var margins = DefaultFloatingButtonMargins(leftMargin, defaultMargins.top, defaultMargins.end, bottomMargin)
+      var configuration = DefaultFloatingButtonConfiguration(margins = margins)
+      val option = DefaultFloatingButtonOption.Enabled(configuration)
+      IAdvizeSDK.defaultFloatingButtonController.setupDefaultFloatingButton(option)
     }
 
     @ReactMethod
@@ -307,10 +355,10 @@ class IadvizeModule(reactContext: ReactApplicationContext) : ReactContextBaseJav
     fun registerTransaction(data: ReadableMap) {
       Log.d("iAdvize SDK", "registerTransaction " + data)
 
-      val transactionId = data.getString("transactionId") ?: ""
-      val amount = data.getDouble("amount") ?: 0.0
-      val currencyValue = data.getString("currency") ?: ""
-      val currency = Currency.safeValueOf(currencyValue) ?: Currency.EUR
+      val transactionId = tryOrNull { data.getString("transactionId") } ?: ""
+      val amount =  tryOrNull { data.getDouble("amount") } ?: 0.0
+      val currencyValue = tryOrNull { data.getString("currency") } ?: ""
+      val currency = tryOrNull { Currency.valueOf(currencyValue) } ?: Currency.EUR
 
       Log.d("iAdvize SDK", transactionId)
       Log.d("iAdvize SDK", amount.toString())

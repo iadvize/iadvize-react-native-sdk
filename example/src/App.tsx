@@ -7,14 +7,16 @@ import Iadvize, {
   ApplicationMode,
   ChatboxConfiguration,
   Transaction,
-} from 'iadvize-react-native-sdk';
+  ConversationChannel,
+  NavigationOption,
+} from '@iadvize-oss/iadvize-react-native-sdk';
 
 export default function App() {
   React.useEffect(() => {
-    Iadvize.setLanguage('FR');
+    Iadvize.setLanguage('fr');
     Iadvize.setLogLevel(LogLevel.VERBOSE);
-    Iadvize.setDefaultChatButton(true);
-    Iadvize.setChatButtonPosition(50, 100);
+    Iadvize.setDefaultFloatingButton(true);
+    Iadvize.setFloatingButtonPosition(25, 25);
 
     IadvizeListeners.onActiveTargetingRuleAvailabilityUpdated?.(function (
       data: any
@@ -42,7 +44,7 @@ export default function App() {
   const activateSDK = async () => {
     try {
       // TODO: replace by your projectId
-      await Iadvize.activate(YOUR_PROJECT_ID_INT, 'userId', 'legalInfoUrl');
+      await Iadvize.activate(3585, 'userId', null);
       console.log('iAdvize SDK activated');
     } catch (e) {
       console.log('iAdvize SDK not activated');
@@ -52,7 +54,7 @@ export default function App() {
 
   const activateTargetingRule = async () => {
     // TODO: replace by your targetingRuleId
-    Iadvize.activateTargetingRule('YOUR_TARGETING_RULE_UUID');
+    Iadvize.activateTargetingRule("e1e3019f-6d3e-460f-9eed-ead015adf9e4", ConversationChannel.CHAT);
   };
 
   const logout = async () => {
@@ -60,7 +62,7 @@ export default function App() {
   };
 
   const registerUserNavigation = async () => {
-    Iadvize.registerUserNavigation();
+    Iadvize.registerUserNavigation(NavigationOption.clear, "", ConversationChannel.CHAT);
   };
 
   const registerPushToken = async () => {

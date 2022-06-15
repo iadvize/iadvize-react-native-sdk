@@ -206,7 +206,7 @@ dependencies {
     }
 
     implementation project(':reactnativeiadvize')
-    implementation 'com.iadvize:iadvize-sdk:2.1.0-beta6'
+    implementation 'com.iadvize:iadvize-sdk:2.5.1'
 }
 
 configurations {
