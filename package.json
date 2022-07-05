@@ -1,6 +1,6 @@
 {
   "name": "@iadvize-oss/iadvize-react-native-sdk",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "iAdvize Conversation SDK - React Native Plugin",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
