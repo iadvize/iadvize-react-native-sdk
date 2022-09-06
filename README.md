@@ -89,7 +89,7 @@ configurations {
 
 dependencies {
   // If you use AndroidX you can use latest SDK
-  implementation 'com.iadvize:iadvize-sdk:2.5.1'
+  implementation 'com.iadvize:iadvize-sdk:2.7.0'
 }
 ```
 
