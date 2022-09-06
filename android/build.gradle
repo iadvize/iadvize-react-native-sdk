@@ -132,7 +132,7 @@ dependencies {
   // noinspection GradleDynamicVersion
   api 'com.facebook.react:react-native:+'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'com.iadvize:iadvize-sdk:2.5.1'
+  implementation 'com.iadvize:iadvize-sdk:2.7.0'
 }
 
 configurations {

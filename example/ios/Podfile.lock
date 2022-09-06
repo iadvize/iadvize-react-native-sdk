@@ -32,16 +32,17 @@ PODS:
     - glog
   - Gifu (3.3.1)
   - glog (0.3.5)
-  - iAdvize (2.5.1):
+  - iAdvize (2.7.0):
     - Apollo (~> 0.36.0)
     - Apollo/SQLite
     - Gifu (~> 3.3.0)
     - JWTDecode (~> 2.6.3)
     - SwiftGraylog (~> 1.1.1)
+    - SwiftyMarkdown (~> 1.2.4)
     - TwilioVideo (~> 4.6)
     - XMPPFramework/Swift (~> 4.0.0)
-  - iadvize-react-native-sdk (2.5.1):
-    - iAdvize (~> 2.5)
+  - iadvize-react-native-sdk (2.7.0):
+    - iAdvize (~> 2.7)
     - React-Core
   - JWTDecode (2.6.3)
   - KissXML (5.3.1):
@@ -283,6 +284,7 @@ PODS:
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
   - SwiftGraylog (1.1.1)
+  - SwiftyMarkdown (1.2.4)
   - TwilioVideo (4.6.3)
   - XMPPFramework/default (4.0.0):
     - CocoaAsyncSocket (~> 7.6)
@@ -338,6 +340,7 @@ SPEC REPOS:
     - libidn
     - SQLite.swift
     - SwiftGraylog
+    - SwiftyMarkdown
     - TwilioVideo
     - XMPPFramework
 
@@ -408,8 +411,8 @@ SPEC CHECKSUMS:
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   Gifu: 416d4e38c4c2fed012f019e0a1d3ffcb58e5b842
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
-  iAdvize: 343dc3afec06528f68558be95536722135d995f2
-  iadvize-react-native-sdk: 1f58e5303e78e0943048940fb6dcc6cea5bb0037
+  iAdvize: cd542ebb79b3c42e9a5d2be39467d89bbaa68fbe
+  iadvize-react-native-sdk: 3939be501b0747c0487ed76e4be033333fed1c77
   JWTDecode: 33e5e26e5ddbd21b2065820894c08fef0cad9509
   KissXML: 5c8e0f2e8b9f071d3e1ae123dec3eb5da615c10c
   libidn: e4576a956b797c584c77aaedfc6e3dd639b61bdc
@@ -435,6 +438,7 @@ SPEC CHECKSUMS:
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   SwiftGraylog: 4fffb151492baa199e708548ece16f4cf1c75413
+  SwiftyMarkdown: 7cdec87c6ab5cd9ea0e22ced288e889960649ba5
   TwilioVideo: 4afaac028c5886f2f3b313a9fcc146a6b7ca34e2
   XMPPFramework: 5d31ff9f73dce031b24bc49bcf88093627a3a86e
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
