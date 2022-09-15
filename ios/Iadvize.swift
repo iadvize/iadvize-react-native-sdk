@@ -31,7 +31,6 @@ extension NavigationOption {
             default:
                 return .clearActiveRule
         }
-
     }
 }
 
@@ -57,8 +56,15 @@ class Iadvize: RCTEventEmitter {
         DispatchQueueHelpers.runOnMainThread {
             let rgpdOption: IAdvizeConversationSDK.GDPROption = URL(string: legalInfoUrl) != nil ? .enabled(option: .legalInformation(url: URL(string: legalInfoUrl)!)) : .disabled
 
+            let authenticationOption: IAdvizeConversationSDK.AuthenticationOption = {
+                guard userId.isEmpty == false else {
+                    return .anonymous
+                }
+                return .simple(userId: userId)
+            }()
+
             IAdvizeSDK.shared.activate(projectId: Int(projectId),
-                                       authenticationOption: .simple(userId: userId),
+                                       authenticationOption: authenticationOption,
                                        gdprOption: rgpdOption){ success in
                 if success {
                     resolve(true)
@@ -99,7 +105,6 @@ class Iadvize: RCTEventEmitter {
     @objc(activateTargetingRule:channel:)
     func activateTargetingRule(uuid: String, channel: String) -> Void {
         DispatchQueueHelpers.runOnMainThread {
-            print("iAdvize iOS SDK - activateTargetingRule: \(uuid) - \(channel)")
             guard let uuid = UUID(uuidString: uuid) else {
                 print("Unable to activate targeting rule: targeting rule id not valid")
                 return
@@ -153,7 +158,6 @@ class Iadvize: RCTEventEmitter {
     
     @objc(registerPushToken:applicationMode:)
     func registerPushToken(pushToken: String, mode: String) -> Void {
-        print("iAdvize iOS SDK - registerPushToken called with \(pushToken) and \(mode)")
         let applicationMode = self.applicationModeFrom(value: mode)
         IAdvizeSDK.shared.notificationController.registerPushToken("the_device_push_token", applicationMode: applicationMode)
     }
@@ -208,8 +212,6 @@ class Iadvize: RCTEventEmitter {
     
     @objc(setChatboxConfiguration:)
     func setChatboxConfiguration(data: [String: Any]) -> Void {
-        print("iAdvize iOS SDK - setChatboxConfiguration called with \(data)")
-        
         var configuration = ChatboxConfiguration()
         
         if let value = data["mainColor"] as? String, let color = UIColor.fromString(hex: value){
