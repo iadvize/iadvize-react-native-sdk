@@ -58,13 +58,19 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
     fun activate(projectId: Int, userId: String, legalInfoUrl: String?, promise: Promise) {
         runOnUiThread {
             Log.d("iAdvize SDK activate", "called")
-            var legalUrl = tryOrNull { URI(legalInfoUrl) }
-            val gdprOption =
-                if (legalUrl != null) GDPROption.Enabled(GDPREnabledOption.LegalUrl(legalUrl)) else GDPROption.Disabled
+
+            val authOption =
+                if (userId.isNotBlank()) AuthenticationOption.Simple(userId)
+                else AuthenticationOption.Anonymous
+            val legalUrl =
+                if (legalInfoUrl.isNullOrBlank()) null
+                else tryOrNull { URI(legalInfoUrl) }
+            val gdprOption = legalUrl?.let { GDPROption.Enabled(GDPREnabledOption.LegalUrl(it)) }
+                ?: GDPROption.Disabled
 
             IAdvizeSDK.activate(
                 projectId,
-                AuthenticationOption.Simple(userId),
+                authOption,
                 gdprOption,
                 object : Callback {
                     override fun onSuccess() {
@@ -129,18 +135,15 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
         }
     }
 
-    fun conversationChannelFrom(value: String): ConversationChannel {
-        when (value) {
-            "chat" -> return ConversationChannel.CHAT
-            "video" -> return ConversationChannel.VIDEO
-            else -> return ConversationChannel.CHAT
-        }
+    fun conversationChannelFrom(value: String): ConversationChannel = when (value) {
+        "chat" -> ConversationChannel.CHAT
+        "video" -> ConversationChannel.VIDEO
+        else -> ConversationChannel.CHAT
     }
 
     @ReactMethod(isBlockingSynchronousMethod = true)
-    fun isActiveTargetingRuleAvailable() {
-        Log.d("iAdvize SDK", "isActiveTargetingRuleAvailable exist only on Android")
-    }
+    fun isActiveTargetingRuleAvailable(): Boolean =
+        IAdvizeSDK.targetingController.isActiveTargetingRuleAvailable()
 
     @ReactMethod
     fun setOnActiveTargetingRuleAvailabilityListener() {
@@ -179,19 +182,18 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
         }
     }
 
-    fun navigationOptionFrom(value: String, uuid: String, channel: String): NavigationOption {
+    fun navigationOptionFrom(value: String, uuid: String, channel: String): NavigationOption =
         when (value) {
-            "clear" -> return NavigationOption.ClearActiveRule
-            "keep" -> return NavigationOption.KeepActiveRule
-            "new" -> return NavigationOption.ActivateNewRule(
+            "clear" -> NavigationOption.ClearActiveRule
+            "keep" -> NavigationOption.KeepActiveRule
+            "new" -> NavigationOption.ActivateNewRule(
                 TargetingRule(
                     UUID.fromString(uuid),
                     conversationChannelFrom(channel)
                 )
             )
-            else -> return NavigationOption.ClearActiveRule
+            else -> NavigationOption.ClearActiveRule
         }
-    }
 
     /*
       Conversation
@@ -315,15 +317,14 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
         runOnUiThread {
             Log.d("iAdvize SDK", "setFloatingButtonPosition called with " + leftMargin.toString())
 
-
             val defaultMargins = DefaultFloatingButtonMargins()
-            var margins = DefaultFloatingButtonMargins(
+            val margins = DefaultFloatingButtonMargins(
                 leftMargin,
                 defaultMargins.top,
                 defaultMargins.end,
                 bottomMargin
             )
-            var configuration = DefaultFloatingButtonConfiguration(margins = margins)
+            val configuration = DefaultFloatingButtonConfiguration(margins = margins)
             val option = DefaultFloatingButtonOption.Enabled(configuration)
             IAdvizeSDK.defaultFloatingButtonController.setupDefaultFloatingButton(option)
         }
@@ -334,7 +335,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
         runOnUiThread {
             Log.d("iAdvize SDK", "setChatboxConfiguration " + data)
 
-            var chatboxConfiguration = ChatboxConfiguration(mainColor = Color.WHITE)
+            val chatboxConfiguration = ChatboxConfiguration(mainColor = Color.WHITE)
             if (data.hasKey("mainColor")) {
                 data.getString("mainColor")?.let { value ->
                     (Color.parseColor(value) as? Int)?.let { color ->
@@ -444,7 +445,6 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
     /*
       Logout
      */
-
     @ReactMethod
     fun logout() {
         runOnUiThread {
