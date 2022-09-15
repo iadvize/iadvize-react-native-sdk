@@ -43,8 +43,8 @@ export default function App() {
 
   const activateSDK = async () => {
     try {
-      // TODO: replace by your projectId
-      await Iadvize.activate(3585, 'userId', null);
+      // TODO: replace by your projectId / userId
+      await Iadvize.activate(-1, "userId", null);
       console.log('iAdvize SDK activated');
     } catch (e) {
       console.log('iAdvize SDK not activated');
@@ -54,7 +54,7 @@ export default function App() {
 
   const activateTargetingRule = async () => {
     // TODO: replace by your targetingRuleId
-    Iadvize.activateTargetingRule("e1e3019f-6d3e-460f-9eed-ead015adf9e4", ConversationChannel.CHAT);
+    Iadvize.activateTargetingRule("targetingRuleId", ConversationChannel.CHAT);
   };
 
   const logout = async () => {

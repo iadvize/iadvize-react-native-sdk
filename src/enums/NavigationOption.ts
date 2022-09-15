@@ -1,6 +1,5 @@
 export enum NavigationOption {
-    CLEAR = 'clear',
-    KEEP = 'keep',
-    NEW = 'new',
-  }
-  
+  CLEAR = 'clear',
+  KEEP = 'keep',
+  NEW = 'new',
+}

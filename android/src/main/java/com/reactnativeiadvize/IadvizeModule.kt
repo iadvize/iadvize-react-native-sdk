@@ -182,8 +182,12 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
         }
     }
 
-    fun navigationOptionFrom(value: String, uuid: String, channel: String): NavigationOption =
-        when (value) {
+    fun navigationOptionFrom(
+        navigationOption: String,
+        uuid: String,
+        channel: String
+    ): NavigationOption =
+        when (navigationOption) {
             "clear" -> NavigationOption.ClearActiveRule
             "keep" -> NavigationOption.KeepActiveRule
             "new" -> NavigationOption.ActivateNewRule(
