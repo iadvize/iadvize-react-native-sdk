@@ -62,7 +62,7 @@ export default function App() {
   };
 
   const registerUserNavigation = async () => {
-    Iadvize.registerUserNavigation(NavigationOption.clear, "", ConversationChannel.CHAT);
+    Iadvize.registerUserNavigation(NavigationOption.CLEAR, "", ConversationChannel.CHAT);
   };
 
   const registerPushToken = async () => {
