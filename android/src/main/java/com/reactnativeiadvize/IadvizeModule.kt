@@ -49,6 +49,10 @@ fun runOnUiThread(function: () -> Unit) {
 class IadvizeModule(reactContext: ReactApplicationContext) :
     ReactContextBaseJavaModule(reactContext) {
 
+    companion object {
+        const val TAG: String = "iAdvize SDK"
+    }
+
     override fun getName(): String = "Iadvize"
 
     /*
@@ -57,7 +61,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
     @ReactMethod
     fun activate(projectId: Int, userId: String, legalInfoUrl: String?, promise: Promise) {
         runOnUiThread {
-            Log.d("iAdvize SDK activate", "called")
+            Log.d(TAG, "activate")
 
             val authOption =
                 if (userId.isNotBlank()) AuthenticationOption.Simple(userId)
@@ -74,12 +78,12 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
                 gdprOption,
                 object : Callback {
                     override fun onSuccess() {
-                        Log.d("iAdvize SDK onSuccess", "onSuccess")
+                        Log.d(TAG, "activate onSuccess")
                         promise.resolve(true)
                     }
 
                     override fun onFailure(t: Throwable) {
-                        Log.d("iAdvize SDK onFailure", t.toString())
+                        Log.d(TAG, "activate onFailure ${t.toString()}")
                         promise.reject("1", t.toString())
                     }
                 }
@@ -93,7 +97,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
     @ReactMethod
     fun setLogLevel(logLevel: Int) {
         runOnUiThread {
-            Log.d("iAdvize SDK setLogLevel", logLevel.toString())
+            Log.d(TAG, "setLogLevel to ${logLevel.toString()}")
             IAdvizeSDK.logLevel = logLevelFrom(logLevel)
         }
     }
@@ -114,7 +118,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
     @ReactMethod
     fun setLanguage(language: String) {
         runOnUiThread {
-            Log.d("iAdvize SDK setLanguage", language)
+            Log.d(TAG, "setLanguage to $language")
             var lang = tryOrNull { Language.valueOf(language) } ?: Language.en
             IAdvizeSDK.targetingController.language = LanguageOption.Custom(lang)
         }
@@ -124,7 +128,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
     fun activateTargetingRule(uuid: String, channel: String) {
         runOnUiThread {
             var value = UUID.fromString(uuid)
-            Log.d("iAdvize SDK - activate targeting rule", value.toString())
+            Log.d(TAG, "activate targeting rule ${value.toString()}")
 
             IAdvizeSDK.targetingController.activateTargetingRule(
                 TargetingRule(
@@ -154,7 +158,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
     @ReactMethod
     fun setOnActiveTargetingRuleAvailabilityListener() {
         runOnUiThread {
-            Log.d("iAdvize SDK", "setOnActiveTargetingRuleAvailabilityListener called")
+            Log.d(TAG, "setOnActiveTargetingRuleAvailabilityListener")
 
             IAdvizeSDK.targetingController.listeners.add(object : TargetingListener {
                 override fun onActiveTargetingRuleAvailabilityUpdated(isActiveTargetingRuleAvailable: Boolean) {
@@ -176,7 +180,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
     @ReactMethod
     fun registerUserNavigation(navigationOption: String, uuid: String, channel: String) {
         runOnUiThread {
-            Log.d("iAdvize SDK", "registerUserNavigation called")
+            Log.d(TAG, "registerUserNavigation")
 
             IAdvizeSDK.targetingController.registerUserNavigation(
                 navigationOptionFrom(
@@ -210,13 +214,13 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
      */
     @ReactMethod(isBlockingSynchronousMethod = true)
     fun ongoingConversationId(): String {
-        Log.d("iAdvize SDK", "ongoingConversationId called")
+        Log.d(TAG, "ongoingConversationId called")
         return IAdvizeSDK.conversationController.ongoingConversation()?.conversationId ?: ""
     }
 
     @ReactMethod(isBlockingSynchronousMethod = true)
     fun ongoingConversationChannel(): String {
-        Log.d("iAdvize SDK", "ongoingConversationChannel called")
+        Log.d(TAG, "ongoingConversationChannel called")
         val channel = (IAdvizeSDK.conversationController.ongoingConversation()?.conversationChannel) ?: ConversationChannel.CHAT
         return conversationChannelToString(channel)
     }
@@ -224,11 +228,11 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
     @ReactMethod
     fun setConversationListener() {
         runOnUiThread {
-            Log.d("iAdvize SDK", "setConversationListener called")
+            Log.d(TAG, "setConversationListener")
 
             IAdvizeSDK.conversationController.listeners.add(object : ConversationListener {
                 override fun onOngoingConversationUpdated(ongoingConversation: OngoingConversation?) {
-                    Log.d("iAdvize SDK", "onOngoingConversationUpdated $ongoingConversation")
+                    Log.d(TAG, "onOngoingConversationUpdated $ongoingConversation")
                     val result = Arguments.createMap()
                     result.putBoolean("hasOngoingConversation", ongoingConversation != null);
                     sendEvent(
@@ -239,14 +243,14 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
                 }
 
                 override fun onNewMessageReceived(content: String) {
-                    Log.d("iAdvize SDK", "onNewMessageReceived $content")
+                    Log.d(TAG, "onNewMessageReceived $content")
                     val result = Arguments.createMap()
                     result.putString("content", content);
                     sendEvent(getReactApplicationContext(), "iadvize_onNewMessageReceived", result);
                 }
 
                 override fun handleClickedUrl(uri: Uri): Boolean {
-                    Log.d("iAdvize SDK", "handleClickedUrl $uri")
+                    Log.d(TAG, "handleClickedUrl $uri")
                     val result = Arguments.createMap()
                     result.putString("uri", uri.toString());
                     sendEvent(getReactApplicationContext(), "iadvize_handleClickedUrl", result);
@@ -262,7 +266,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
         @Nullable params: WritableMap
     ) {
         runOnUiThread {
-            Log.d("iAdvize SDK", "sendEvent " + eventName + "called")
+            Log.d(TAG, "sendEvent " + eventName + "called")
             reactContext
                 .getJSModule<RCTDeviceEventEmitter>(RCTDeviceEventEmitter::class.java)
                 .emit(eventName, params)
@@ -275,7 +279,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
     @ReactMethod
     fun registerPushToken(pushToken: String, mode: String) {
         runOnUiThread {
-            Log.d("iAdvize SDK", "set pushToken " + pushToken)
+            Log.d(TAG, "set pushToken " + pushToken)
             IAdvizeSDK.notificationController.registerPushToken(pushToken)
         }
     }
@@ -316,7 +320,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
     @ReactMethod
     fun setDefaultFloatingButton(active: Boolean) {
         runOnUiThread {
-            Log.d("iAdvize SDK", "setDefaultFloatingButton called with " + active.toString())
+            Log.d(TAG, "setDefaultFloatingButton called with " + active.toString())
             if (!active) {
                 IAdvizeSDK.defaultFloatingButtonController.setupDefaultFloatingButton(
                     DefaultFloatingButtonOption.Disabled
@@ -332,7 +336,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
     @ReactMethod
     fun setFloatingButtonPosition(leftMargin: Int, bottomMargin: Int) {
         runOnUiThread {
-            Log.d("iAdvize SDK", "setFloatingButtonPosition called with " + leftMargin.toString())
+            Log.d(TAG, "setFloatingButtonPosition called with " + leftMargin.toString())
 
             val defaultMargins = DefaultFloatingButtonMargins()
             val margins = DefaultFloatingButtonMargins(
@@ -350,13 +354,13 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
     @ReactMethod
     fun setChatboxConfiguration(data: ReadableMap) {
         runOnUiThread {
-            Log.d("iAdvize SDK", "setChatboxConfiguration " + data)
+            Log.d(TAG, "setChatboxConfiguration " + data)
 
             val chatboxConfiguration = ChatboxConfiguration(mainColor = Color.WHITE)
             if (data.hasKey("mainColor")) {
                 data.getString("mainColor")?.let { value ->
                     (Color.parseColor(value) as? Int)?.let { color ->
-                        Log.d("iAdvize SDK", "set mainColor " + value)
+                        Log.d(TAG, "set mainColor " + value)
                         chatboxConfiguration.mainColor = color
                     }
                 }
@@ -365,7 +369,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
             if (data.hasKey("navigationBarBackgroundColor")) {
                 data.getString("navigationBarBackgroundColor")?.let { value ->
                     (Color.parseColor(value) as? Int)?.let { color ->
-                        Log.d("iAdvize SDK", "set toolbarBackgroundColor " + value)
+                        Log.d(TAG, "set toolbarBackgroundColor " + value)
                         chatboxConfiguration.toolbarBackgroundColor = color
                     }
                 }
@@ -374,36 +378,36 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
             if (data.hasKey("navigationBarMainColor")) {
                 data.getString("navigationBarMainColor")?.let { value ->
                     (Color.parseColor(value) as? Int)?.let { color ->
-                        Log.d("iAdvize SDK", "set toolbarMainColor " + value)
+                        Log.d(TAG, "set toolbarMainColor " + value)
                         chatboxConfiguration.toolbarMainColor = color
                     }
                 }
             }
 
-            if (data.hasKey("navigationBarTitle")) {
-                data.getString("navigationBarTitle")?.let { value ->
-                    Log.d("iAdvize SDK", "set toolbarTitle " + value)
+            if (data.hasKey("toolbarTitle")) {
+                data.getString("toolbarTitle")?.let { value ->
+                    Log.d(TAG, "set toolbarTitle " + value)
                     chatboxConfiguration.toolbarTitle = value
                 }
             }
 
             if (data.hasKey("fontPath")) {
                 data.getString("fontPath")?.let { value ->
-                    Log.d("iAdvize SDK", "set fontPath " + value)
+                    Log.d(TAG, "set fontPath " + value)
                     chatboxConfiguration.fontPath = value
                 }
             }
 
             if (data.hasKey("automaticMessage")) {
                 data.getString("automaticMessage")?.let { value ->
-                    Log.d("iAdvize SDK", "set automaticMessage " + value)
+                    Log.d(TAG, "set automaticMessage " + value)
                     chatboxConfiguration.automaticMessage = value
                 }
             }
 
             if (data.hasKey("gdprMessage")) {
                 data.getString("gdprMessage")?.let { value ->
-                    Log.d("iAdvize SDK", "set gdprMessage " + value)
+                    Log.d(TAG, "set gdprMessage " + value)
                     chatboxConfiguration.gdprMessage = value
                 }
             }
@@ -411,7 +415,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
             if (data.hasKey("incomingMessageAvatarImageName")) {
                 data.getString("incomingMessageAvatarImageName")?.let { value ->
                     Drawable.createFromPath(value)?.let { drawable ->
-                        Log.d("iAdvize SDK", "set incomingMessageAvatarImageName " + value)
+                        Log.d(TAG, "set incomingMessageAvatarImageName " + value)
                         chatboxConfiguration.incomingMessageAvatar =
                             IncomingMessageAvatar.Image(drawable)
                     }
@@ -420,7 +424,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
 
             if (data.hasKey("incomingMessageAvatarURL")) {
                 data.getString("incomingMessageAvatarURL")?.let { value ->
-                    Log.d("iAdvize SDK", "set incomingMessageAvatarURL " + value)
+                    Log.d(TAG, "set incomingMessageAvatarURL " + value)
                     var url = URL(value)
                     chatboxConfiguration.incomingMessageAvatar = IncomingMessageAvatar.Url(url)
                 }
@@ -448,17 +452,17 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
     @ReactMethod
     fun registerTransaction(data: ReadableMap) {
         runOnUiThread {
-            Log.d("iAdvize SDK", "registerTransaction " + data)
+            Log.d(TAG, "registerTransaction " + data)
 
             val transactionId = tryOrNull { data.getString("transactionId") } ?: ""
             val amount = tryOrNull { data.getDouble("amount") } ?: 0.0
             val currencyValue = tryOrNull { data.getString("currency") } ?: ""
             val currency = tryOrNull { Currency.valueOf(currencyValue) } ?: Currency.EUR
 
-            Log.d("iAdvize SDK", transactionId)
-            Log.d("iAdvize SDK", amount.toString())
-            Log.d("iAdvize SDK", currencyValue)
-            Log.d("iAdvize SDK", currency.toString())
+            Log.d(TAG, transactionId)
+            Log.d(TAG, amount.toString())
+            Log.d(TAG, currencyValue)
+            Log.d(TAG, currency.toString())
             IAdvizeSDK.transactionController.register(
                 Transaction(
                     transactionId,
@@ -476,7 +480,7 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
     @ReactMethod
     fun logout() {
         runOnUiThread {
-            Log.d("iAdvize SDK", "logout called")
+            Log.d(TAG, "logout called")
             IAdvizeSDK.logout()
         }
     }
