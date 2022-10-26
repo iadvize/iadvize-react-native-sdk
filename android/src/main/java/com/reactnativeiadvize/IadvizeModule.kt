@@ -141,6 +141,12 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
         else -> ConversationChannel.CHAT
     }
 
+    fun conversationChannelToString(value: ConversationChannel): String = when (value) {
+        ConversationChannel.CHAT -> "chat"
+        ConversationChannel.VIDEO -> "video"
+        else -> "chat"
+    }
+
     @ReactMethod(isBlockingSynchronousMethod = true)
     fun isActiveTargetingRuleAvailable(): Boolean =
         IAdvizeSDK.targetingController.isActiveTargetingRuleAvailable()
@@ -203,9 +209,16 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
       Conversation
      */
     @ReactMethod(isBlockingSynchronousMethod = true)
-    fun hasOngoingConversation(): Boolean {
-        Log.d("iAdvize SDK", "hasOngoingConversation called")
-        return IAdvizeSDK.conversationController.ongoingConversation() != null
+    fun ongoingConversationId(): String {
+        Log.d("iAdvize SDK", "ongoingConversationId called")
+        return IAdvizeSDK.conversationController.ongoingConversation()?.conversationId ?: ""
+    }
+
+    @ReactMethod(isBlockingSynchronousMethod = true)
+    fun ongoingConversationChannel(): String {
+        Log.d("iAdvize SDK", "ongoingConversationChannel called")
+        val channel = (IAdvizeSDK.conversationController.ongoingConversation()?.conversationChannel) ?: ConversationChannel.CHAT
+        return conversationChannelToString(channel)
     }
 
     @ReactMethod
@@ -367,8 +380,8 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
                 }
             }
 
-            if (data.hasKey("toolbarTitle")) {
-                data.getString("toolbarTitle")?.let { value ->
+            if (data.hasKey("navigationBarTitle")) {
+                data.getString("navigationBarTitle")?.let { value ->
                     Log.d("iAdvize SDK", "set toolbarTitle " + value)
                     chatboxConfiguration.toolbarTitle = value
                 }
@@ -415,6 +428,17 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
 
             IAdvizeSDK.chatboxController.setupChatbox(chatboxConfiguration)
         }
+    }
+
+    @ReactMethod
+    fun presentChatbox() {
+        val it = getReactApplicationContext().getApplicationContext()
+        IAdvizeSDK.chatboxController.presentChatbox(it)
+    }
+
+    @ReactMethod
+    fun dismissChatbox() {
+        IAdvizeSDK.chatboxController.dismissChatbox()
     }
 
     /*

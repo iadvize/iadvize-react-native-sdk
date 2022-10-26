@@ -32,7 +32,7 @@ PODS:
     - glog
   - Gifu (3.3.1)
   - glog (0.3.5)
-  - iAdvize (2.7.0):
+  - iAdvize (2.8.1):
     - Apollo (~> 0.36.0)
     - Apollo/SQLite
     - Gifu (~> 3.3.0)
@@ -41,8 +41,8 @@ PODS:
     - SwiftyMarkdown (~> 1.2.4)
     - TwilioVideo (~> 4.6)
     - XMPPFramework/Swift (~> 4.0.0)
-  - iadvize-react-native-sdk (2.7.0):
-    - iAdvize (~> 2.7)
+  - iadvize-react-native-sdk (2.7.1):
+    - iAdvize
     - React-Core
   - JWTDecode (2.6.3)
   - KissXML (5.3.1):
@@ -411,8 +411,8 @@ SPEC CHECKSUMS:
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   Gifu: 416d4e38c4c2fed012f019e0a1d3ffcb58e5b842
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
-  iAdvize: cd542ebb79b3c42e9a5d2be39467d89bbaa68fbe
-  iadvize-react-native-sdk: 3939be501b0747c0487ed76e4be033333fed1c77
+  iAdvize: df702bbc066fa854887c69ae3c548ac077af2f4e
+  iadvize-react-native-sdk: 1703a1c20a7ac0d9d2f46345f86eb2a0deccfe2e
   JWTDecode: 33e5e26e5ddbd21b2065820894c08fef0cad9509
   KissXML: 5c8e0f2e8b9f071d3e1ae123dec3eb5da615c10c
   libidn: e4576a956b797c584c77aaedfc6e3dd639b61bdc

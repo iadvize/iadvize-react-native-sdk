@@ -18,7 +18,8 @@ export type IadvizeType = {
   onActiveTargetingRuleAvailabilityUpdatedListener: any;
   registerUserNavigation(navigationOption: NavigationOption, uuid: string, conversationChannel: ConversationChannel): void;
   // Conversation
-  hasOngoingConversation(): number;
+  ongoingConversationId(): string;
+  ongoingConversationChannel(): string;
   setConversationListener(): void;
   onOngoingConversationStatusChangedListener: any;
   onNewMessageReceivedListener: any;

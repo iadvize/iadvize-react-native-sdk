@@ -141,9 +141,15 @@ class Iadvize: RCTEventEmitter {
     //MARK: Conversation
     
     @objc
-    func hasOngoingConversation() -> NSNumber{
-        print("iAdvize iOS SDK - hasOngoingConversation called")
-        return IAdvizeSDK.shared.conversationController.hasOngoingConversation as NSNumber
+    func ongoingConversationId() -> String? {
+        print("iAdvize iOS SDK - ongoingConversationId called")
+        return IAdvizeSDK.shared.conversationController.ongoingConversation()?.conversationId.uuidString
+    }
+
+    @objc
+    func ongoingConversationChannel() -> String? {
+        print("iAdvize iOS SDK - ongoingConversationChannel called")
+        return IAdvizeSDK.shared.conversationController.ongoingConversation()?.conversationChannel.rawValue
     }
     
     @objc
@@ -265,6 +271,17 @@ class Iadvize: RCTEventEmitter {
             IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
         }
     }
+
+
+    @objc(presentChatbox)
+    func presentChatbox() {
+        IAdvizeSDK.shared.chatboxController.presentChatbox()
+    }
+
+    @objc(dismissChatbox)
+    func dismissChatbox() {
+        IAdvizeSDK.shared.chatboxController.dismissChatbox()
+    }
     
     //MARK: Transaction
     
@@ -301,8 +318,8 @@ extension Iadvize: TargetingControllerDelegate {
 }
 
 extension Iadvize: ConversationControllerDelegate {
-    func ongoingConversationStatusDidChange(hasOngoingConversation: Bool) {
-        sendEvent(withName: "iadvize_onOngoingConversationStatusChanged", body: ["hasOngoingConversation": hasOngoingConversation])
+    func ongoingConversationUpdated(ongoingConversation: IAdvizeConversationSDK.OngoingConversation?) {
+        sendEvent(withName: "iadvize_onOngoingConversationStatusChanged", body: ["hasOngoingConversation": ongoingConversation != nil])
         print("iAdvize iOS SDK - ongoingConversationStatusDidChange called")
     }
 

@@ -405,7 +405,6 @@
 				"${BUILT_PRODUCTS_DIR}/libidn/libidn.framework",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/TwilioVideo/TwilioVideo.framework/TwilioVideo",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/iAdvize/IAdvizeConversationSDK.framework/IAdvizeConversationSDK",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/iAdvize/ConversationUI.framework/ConversationUI",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -444,7 +443,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libidn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwilioVideo.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IAdvizeConversationSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ConversationUI.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

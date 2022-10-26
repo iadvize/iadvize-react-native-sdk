@@ -21,7 +21,9 @@ RCT_EXTERN_METHOD(setLanguage:(NSString *)language)
 
 RCT_EXTERN__BLOCKING_SYNCHRONOUS_METHOD(isActiveTargetingRuleAvailable)
 
-RCT_EXTERN__BLOCKING_SYNCHRONOUS_METHOD(hasOngoingConversation)
+RCT_EXTERN__BLOCKING_SYNCHRONOUS_METHOD(ongoingConversationId)
+
+RCT_EXTERN__BLOCKING_SYNCHRONOUS_METHOD(ongoingConversationChannel)
 
 RCT_EXTERN_METHOD(registerPushToken:(NSString *)pushToken applicationMode:(NSString *)applicationMode)
 
@@ -44,5 +46,9 @@ RCT_EXTERN_METHOD(setDefaultFloatingButton:(BOOL))
 RCT_EXTERN_METHOD(setFloatingButtonPosition:(nonnull NSNumber *)leftMargin bottomMargin:(nonnull NSNumber *)bottomMargin)
 
 RCT_EXTERN_METHOD(registerTransaction:(NSDictionary *)transaction)
+
+RCT_EXTERN_METHOD(presentChatbox)
+
+RCT_EXTERN_METHOD(dismissChatbox)
 
 @end
