@@ -89,7 +89,7 @@ configurations {
 
 dependencies {
   // If you use AndroidX you can use latest SDK
-  implementation 'com.iadvize:iadvize-sdk:2.7.0'
+  implementation 'com.iadvize:iadvize-sdk:2.8.0'
 }
 ```
 
@@ -230,7 +230,13 @@ Iadvize.registerUserNavigation(NavigationOption.new, "YOUR_TARGETING_RULE_UUID",
 To know and to observe the evolution of the conversation state, you will have access to a variable:
 
 ```js
-Iadvize.hasOngoingConversation()
+Iadvize.ongoingConversationId()
+```
+
+you will be able to figure out the channel of the current conversation by calling:
+
+```js
+Iadvize.ongoingConversationChannel()
 ```
 
 You can also add a delegate to be informed in real time about conversation events:

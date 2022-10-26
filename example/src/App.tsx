@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View, Button, SegmentedControlIOSBase } from 'react-native';
 import Iadvize, {
   IadvizeListeners,
   LogLevel,
@@ -115,6 +115,16 @@ export default function App() {
     Iadvize.registerTransaction(transaction);
   };
 
+  const ongoingConversationId = async () => {
+    const convId = Iadvize.ongoingConversationId();
+    console.log(`iAdvize SDK conversationId: ${ convId }`);
+  };
+
+  const ongoingConversationChannel = async () => {
+    const convChannel = Iadvize.ongoingConversationChannel();
+    console.log(`iAdvize SDK conversationChannel: ${ convChannel }`);
+  };
+
   return (
     <View style={styles.container}>
       <Button title="Activate" onPress={() => activateSDK()} />
@@ -151,6 +161,14 @@ export default function App() {
       <Button
         title="Register Transaction"
         onPress={() => registerTransaction()}
+      />
+      <Button
+        title="Print Conversation Id"
+        onPress={() => ongoingConversationId()}
+      />
+      <Button
+        title="Print Conversation Channel"
+        onPress={() => ongoingConversationChannel()}
       />
     </View>
   );
