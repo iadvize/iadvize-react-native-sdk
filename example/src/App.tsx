@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Button, SegmentedControlIOSBase } from 'react-native';
+import { StyleSheet, Image, Linking, View, Button, SegmentedControlIOSBase } from 'react-native';
 import Iadvize, {
   IadvizeListeners,
   LogLevel,
@@ -38,6 +38,8 @@ export default function App() {
     IadvizeListeners.handleClickedUrl?.(function (data: any) {
       console.log('handleClickedUrl called');
       console.log(data);
+      // Manage the clicked url as you wish
+      Linking.openURL(data.uri);
     });
   }, []);
 
@@ -100,8 +102,8 @@ export default function App() {
       fontPath: '/',
       automaticMessage: 'Hello! Please ask your question :)',
       gdprMessage: 'Your own GDPR message.',
-      incomingMessageAvatarImageName: 'image',
-      incomingMessageAvatarURL: 'https://image.test',
+      incomingMessageAvatarImageName: Image.resolveAssetSource(require('./test.jpeg')).uri, // Will take precedence over AvatarURL
+      incomingMessageAvatarURL: 'https://picsum.photos/200/200',
     };
     Iadvize.setChatboxConfiguration(configuration);
   };

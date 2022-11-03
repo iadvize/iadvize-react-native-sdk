@@ -412,19 +412,16 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
                 }
             }
 
-            if (data.hasKey("incomingMessageAvatarImageName")) {
-                data.getString("incomingMessageAvatarImageName")?.let { value ->
-                    Drawable.createFromPath(value)?.let { drawable ->
-                        Log.d(TAG, "set incomingMessageAvatarImageName " + value)
-                        chatboxConfiguration.incomingMessageAvatar =
-                            IncomingMessageAvatar.Image(drawable)
-                    }
-                }
-            }
-
             if (data.hasKey("incomingMessageAvatarURL")) {
                 data.getString("incomingMessageAvatarURL")?.let { value ->
                     Log.d(TAG, "set incomingMessageAvatarURL " + value)
+                    var url = URL(value)
+                    chatboxConfiguration.incomingMessageAvatar = IncomingMessageAvatar.Url(url)
+                }
+            }
+
+            if (data.hasKey("incomingMessageAvatarImageName")) {
+                data.getString("incomingMessageAvatarImageName")?.let { value ->
                     var url = URL(value)
                     chatboxConfiguration.incomingMessageAvatar = IncomingMessageAvatar.Url(url)
                 }
