@@ -53,6 +53,9 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
         const val TAG: String = "iAdvize SDK"
     }
 
+    private var defaultFloatingButtonConfiguration = DefaultFloatingButtonConfiguration()
+    private var defaultFloatingButtonEnabled: Boolean = true
+
     override fun getName(): String = "Iadvize"
 
     /*
@@ -221,7 +224,8 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
     @ReactMethod(isBlockingSynchronousMethod = true)
     fun ongoingConversationChannel(): String {
         Log.d(TAG, "ongoingConversationChannel called")
-        val channel = (IAdvizeSDK.conversationController.ongoingConversation()?.conversationChannel) ?: ConversationChannel.CHAT
+        val channel = (IAdvizeSDK.conversationController.ongoingConversation()?.conversationChannel)
+            ?: ConversationChannel.CHAT
         return conversationChannelToString(channel)
     }
 
@@ -321,15 +325,8 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
     fun setDefaultFloatingButton(active: Boolean) {
         runOnUiThread {
             Log.d(TAG, "setDefaultFloatingButton called with " + active.toString())
-            if (!active) {
-                IAdvizeSDK.defaultFloatingButtonController.setupDefaultFloatingButton(
-                    DefaultFloatingButtonOption.Disabled
-                )
-            } else {
-                val configuration = DefaultFloatingButtonConfiguration()
-                val option = DefaultFloatingButtonOption.Enabled(configuration)
-                IAdvizeSDK.defaultFloatingButtonController.setupDefaultFloatingButton(option)
-            }
+            defaultFloatingButtonEnabled = active
+            refreshDefaultFloatingButton()
         }
     }
 
@@ -338,16 +335,15 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
         runOnUiThread {
             Log.d(TAG, "setFloatingButtonPosition called with " + leftMargin.toString())
 
-            val defaultMargins = DefaultFloatingButtonMargins()
-            val margins = DefaultFloatingButtonMargins(
-                leftMargin,
-                defaultMargins.top,
-                defaultMargins.end,
-                bottomMargin
+            val bgTint = defaultFloatingButtonConfiguration.backgroundTint
+            defaultFloatingButtonConfiguration = DefaultFloatingButtonConfiguration(
+                margins = DefaultFloatingButtonMargins(
+                    start = leftMargin,
+                    bottom = bottomMargin
+                ),
+                backgroundTint = bgTint,
             )
-            val configuration = DefaultFloatingButtonConfiguration(margins = margins)
-            val option = DefaultFloatingButtonOption.Enabled(configuration)
-            IAdvizeSDK.defaultFloatingButtonController.setupDefaultFloatingButton(option)
+            refreshDefaultFloatingButton()
         }
     }
 
@@ -362,6 +358,13 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
                     (Color.parseColor(value) as? Int)?.let { color ->
                         Log.d(TAG, "set mainColor " + value)
                         chatboxConfiguration.mainColor = color
+
+                        val margins = defaultFloatingButtonConfiguration.margins
+                        defaultFloatingButtonConfiguration = DefaultFloatingButtonConfiguration(
+                            margins = margins,
+                            backgroundTint = color,
+                        )
+                        refreshDefaultFloatingButton()
                     }
                 }
             }
@@ -429,6 +432,14 @@ class IadvizeModule(reactContext: ReactApplicationContext) :
 
             IAdvizeSDK.chatboxController.setupChatbox(chatboxConfiguration)
         }
+    }
+
+    private fun refreshDefaultFloatingButton() {
+        IAdvizeSDK.defaultFloatingButtonController.setupDefaultFloatingButton(
+            if (defaultFloatingButtonEnabled)
+                DefaultFloatingButtonOption.Enabled(defaultFloatingButtonConfiguration)
+            else DefaultFloatingButtonOption.Disabled
+        )
     }
 
     @ReactMethod
