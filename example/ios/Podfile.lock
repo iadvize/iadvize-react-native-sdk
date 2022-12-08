@@ -41,7 +41,7 @@ PODS:
     - SwiftyMarkdown (~> 1.2.4)
     - TwilioVideo (~> 4.6)
     - XMPPFramework/Swift (~> 4.0.0)
-  - iadvize-react-native-sdk (2.7.1):
+  - iadvize-react-native-sdk (2.8.1):
     - iAdvize
     - React-Core
   - JWTDecode (2.6.3)
@@ -412,7 +412,7 @@ SPEC CHECKSUMS:
   Gifu: 416d4e38c4c2fed012f019e0a1d3ffcb58e5b842
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   iAdvize: df702bbc066fa854887c69ae3c548ac077af2f4e
-  iadvize-react-native-sdk: 1703a1c20a7ac0d9d2f46345f86eb2a0deccfe2e
+  iadvize-react-native-sdk: acd99eb105ba758827ec9f005edc15c30b570d53
   JWTDecode: 33e5e26e5ddbd21b2065820894c08fef0cad9509
   KissXML: 5c8e0f2e8b9f071d3e1ae123dec3eb5da615c10c
   libidn: e4576a956b797c584c77aaedfc6e3dd639b61bdc
@@ -445,4 +445,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 8bbe63d7b04682fc645ce8819075c5d05104e589
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
