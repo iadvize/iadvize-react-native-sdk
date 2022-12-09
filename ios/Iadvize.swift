@@ -165,7 +165,7 @@ class Iadvize: RCTEventEmitter {
     @objc(registerPushToken:applicationMode:)
     func registerPushToken(pushToken: String, mode: String) -> Void {
         let applicationMode = self.applicationModeFrom(value: mode)
-        IAdvizeSDK.shared.notificationController.registerPushToken("the_device_push_token", applicationMode: applicationMode)
+        IAdvizeSDK.shared.notificationController.registerPushToken(pushToken, applicationMode: applicationMode)
     }
     
     func applicationModeFrom(value: String) -> ApplicationMode{
