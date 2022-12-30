@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import { StyleSheet, Image, Linking, View, Button, SegmentedControlIOSBase } from 'react-native';
-import Iadvize, {
-  IadvizeListeners,
+import IAdvizeSDK, {
+  IAdvizeSDKListeners,
   LogLevel,
   ApplicationMode,
   ChatboxConfiguration,
@@ -13,40 +13,40 @@ import Iadvize, {
 
 export default function App() {
   React.useEffect(() => {
-    Iadvize.setLanguage('fr');
-    Iadvize.setLogLevel(LogLevel.VERBOSE);
-    Iadvize.setDefaultFloatingButton(true);
-    Iadvize.setFloatingButtonPosition(25, 25);
+    IAdvizeSDK.setLanguage('fr');
+    IAdvizeSDK.setLogLevel(LogLevel.VERBOSE);
+    IAdvizeSDK.setDefaultFloatingButton(true);
+    IAdvizeSDK.setFloatingButtonPosition(25, 25);
 
-    IadvizeListeners.onActiveTargetingRuleAvailabilityUpdated?.(function (
-      data: any
-    ) {
-      console.log('onActiveTargetingRuleAvailabilityChanged called');
-      console.log(data);
+    IAdvizeSDKListeners.onGDPRMoreInfoClicked(function (eventData: any) {
+      console.log('onGDPRMoreInfoClicked', eventData);
     });
 
-    IadvizeListeners.onOngoingConversationStatusChanged?.(function (data: any) {
-      console.log('onOngoingConversationStatusChanged called');
-      console.log(data);
+    IAdvizeSDKListeners.onActiveTargetingRuleAvailabilityUpdated(function (eventData: any) {
+      console.log('onActiveTargetingRuleAvailabilityChanged', eventData);
     });
 
-    IadvizeListeners.onNewMessageReceived?.(function (data: any) {
-      console.log('onNewMessageReceived called');
-      console.log(data);
+    IAdvizeSDKListeners.onOngoingConversationStatusChanged(function (eventData: any) {
+      console.log('onOngoingConversationStatusChanged', eventData);
     });
 
-    IadvizeListeners.handleClickedUrl?.(function (data: any) {
-      console.log('handleClickedUrl called');
-      console.log(data);
+    IAdvizeSDKListeners.onNewMessageReceived(function (eventData: any) {
+      console.log('onNewMessageReceived', eventData);
+    });
+
+    IAdvizeSDKListeners.handleClickedUrl(function (eventData: any) {
+      console.log('handleClickedUrl', eventData);
+
       // Manage the clicked url as you wish
-      Linking.openURL(data.uri);
+      Linking.openURL(eventData.uri);
     });
+
   }, []);
 
   const activateSDK = async () => {
     try {
-      // TODO: replace by your projectId / userId
-      await Iadvize.activate(-1, "userId", null);
+      // TODO: replace with your projectId / userId
+      await IAdvizeSDK.activate(-1, "userId", null);
       console.log('iAdvize SDK activated');
     } catch (e) {
       console.log('iAdvize SDK not activated');
@@ -55,25 +55,25 @@ export default function App() {
   };
 
   const activateTargetingRule = async () => {
-    // TODO: replace by your targetingRuleId
-    Iadvize.activateTargetingRule("targetingRuleId", ConversationChannel.CHAT);
+    // TODO: replace with your targetingRuleId
+    IAdvizeSDK.activateTargetingRule("targetingRuleId", ConversationChannel.CHAT);
   };
 
   const logout = async () => {
-    Iadvize.logout();
+    IAdvizeSDK.logout();
   };
 
   const registerUserNavigation = async () => {
-    Iadvize.registerUserNavigation(NavigationOption.CLEAR, "", ConversationChannel.CHAT);
+    IAdvizeSDK.registerUserNavigation(NavigationOption.CLEAR, "", ConversationChannel.CHAT);
   };
 
   const registerPushToken = async () => {
-    Iadvize.registerPushToken('12345-67890', ApplicationMode.DEV);
+    IAdvizeSDK.registerPushToken('12345-67890', ApplicationMode.DEV);
   };
 
   const enablePushNotifications = async () => {
     try {
-      await Iadvize.enablePushNotifications();
+      await IAdvizeSDK.enablePushNotifications();
       console.log('iAdvize SDK enablePushNotifications success');
     } catch (e) {
       console.log('iAdvize SDK enablePushNotifications failure');
@@ -83,7 +83,7 @@ export default function App() {
 
   const disablePushNotifications = async () => {
     try {
-      await Iadvize.disablePushNotifications();
+      await IAdvizeSDK.disablePushNotifications();
       console.log('iAdvize SDK disablePushNotifications success');
     } catch (e) {
       console.log('iAdvize SDK disablePushNotifications failure');
@@ -105,7 +105,7 @@ export default function App() {
       incomingMessageAvatarImageName: Image.resolveAssetSource(require('./test.jpeg')).uri, // Will take precedence over AvatarURL
       incomingMessageAvatarURL: 'https://picsum.photos/200/200',
     };
-    Iadvize.setChatboxConfiguration(configuration);
+    IAdvizeSDK.setChatboxConfiguration(configuration);
   };
 
   const registerTransaction = async () => {
@@ -114,16 +114,27 @@ export default function App() {
       currency: 'EUR',
       amount: 100,
     };
-    Iadvize.registerTransaction(transaction);
+    IAdvizeSDK.registerTransaction(transaction);
+  };
+
+  const registerCustomData = async () => {
+    // String Key - Values can be String/Int/Double/Boolean
+    var customData = {
+      "Test": "Test",
+      "Test2": false,
+      "Test3": 2.5,
+      "Test4": 3
+    };
+    IAdvizeSDK.registerCustomData(customData);
   };
 
   const ongoingConversationId = async () => {
-    const convId = Iadvize.ongoingConversationId();
+    const convId = IAdvizeSDK.ongoingConversationId();
     console.log(`iAdvize SDK conversationId: ${ convId }`);
   };
 
   const ongoingConversationChannel = async () => {
-    const convChannel = Iadvize.ongoingConversationChannel();
+    const convChannel = IAdvizeSDK.ongoingConversationChannel();
     console.log(`iAdvize SDK conversationChannel: ${ convChannel }`);
   };
 
@@ -164,10 +175,17 @@ export default function App() {
         title="Register Transaction"
         onPress={() => registerTransaction()}
       />
+      <View style={styles.margin} />
+      <Button
+        title="Register custom data"
+        onPress={() => registerCustomData()}
+      />
+      <View style={styles.margin} />
       <Button
         title="Print Conversation Id"
         onPress={() => ongoingConversationId()}
       />
+      <View style={styles.margin} />
       <Button
         title="Print Conversation Channel"
         onPress={() => ongoingConversationChannel()}
