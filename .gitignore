@@ -65,3 +65,4 @@ buck-out/
 
 # iAdvize artifacts
 IAdvizeSDK.zip
+tmp/
