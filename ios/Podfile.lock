@@ -24,7 +24,7 @@ PODS:
   - fmt (6.2.1)
   - Gifu (3.3.1)
   - glog (0.3.5)
-  - iAdvize (2.8.3):
+  - iAdvize (2.8.4):
     - Apollo (~> 0.36.0)
     - Apollo/SQLite
     - Gifu (~> 3.3.0)
@@ -33,8 +33,8 @@ PODS:
     - SwiftyMarkdown (~> 1.2.4)
     - TwilioVideo (~> 4.6)
     - XMPPFramework/Swift (~> 4.0.0)
-  - iadvize-react-native-sdk (2.8.2):
-    - iAdvize (~> 2.8.3)
+  - iadvize-reactnative-sdk (3.0.0):
+    - iAdvize (~> 2.8.4)
     - React-Core
   - JWTDecode (2.6.3)
   - KissXML (5.3.1):
@@ -343,7 +343,7 @@ DEPENDENCIES:
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - "iadvize-react-native-sdk (from `../node_modules/@iadvize-oss/iadvize-react-native-sdk`)"
+  - "iadvize-reactnative-sdk (from `../node_modules/@iadvize-oss/iadvize-react-native-sdk/ios/`)"
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -401,8 +401,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/React/FBReactNativeSpec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
-  iadvize-react-native-sdk:
-    :path: "../node_modules/@iadvize-oss/iadvize-react-native-sdk"
+  iadvize-reactnative-sdk:
+    :path: "../node_modules/@iadvize-oss/iadvize-react-native-sdk/ios/"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -469,8 +469,8 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   Gifu: 416d4e38c4c2fed012f019e0a1d3ffcb58e5b842
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
-  iAdvize: 7fb21f8029cd2991de7a45043554ccf6029dfed3
-  iadvize-react-native-sdk: 84cc9cbf56d938eabb2bde4654346a709ba0377f
+  iAdvize: 8cc856a36726503e3b7785fddfa62ef500b4d709
+  iadvize-reactnative-sdk: 177a6113485266047e72d435a48b15e1edc34768
   JWTDecode: 33e5e26e5ddbd21b2065820894c08fef0cad9509
   KissXML: 5c8e0f2e8b9f071d3e1ae123dec3eb5da615c10c
   libidn: e4576a956b797c584c77aaedfc6e3dd639b61bdc
@@ -507,6 +507,6 @@ SPEC CHECKSUMS:
   XMPPFramework: 5d31ff9f73dce031b24bc49bcf88093627a3a86e
   Yoga: 99caf8d5ab45e9d637ee6e0174ec16fbbb01bcfc
 
-PODFILE CHECKSUM: 6dd4912ba7fcdf3c58bfe2ff67e9158e205db432
+PODFILE CHECKSUM: a493c6d731f5fd35af9c7187343edbfbdb229d62
 
 COCOAPODS: 1.11.3
