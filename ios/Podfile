@@ -27,6 +27,8 @@ target 'sample' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'iadvize-reactnative-sdk', :path => '../node_modules/@iadvize-oss/iadvize-react-native-sdk/ios/'
+
   target 'sampleTests' do
     inherit! :complete
     # Pods for testing
