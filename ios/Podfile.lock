@@ -1,10 +1,4 @@
 PODS:
-  - Apollo (0.36.0):
-    - Apollo/Core (= 0.36.0)
-  - Apollo/Core (0.36.0)
-  - Apollo/SQLite (0.36.0):
-    - Apollo/Core
-    - SQLite.swift (~> 0.12.2)
   - boost (1.76.0)
   - CocoaAsyncSocket (7.6.5)
   - CocoaLumberjack (3.8.0):
@@ -22,21 +16,13 @@ PODS:
     - React-jsi (= 0.70.6)
     - ReactCommon/turbomodule/core (= 0.70.6)
   - fmt (6.2.1)
-  - Gifu (3.3.1)
   - glog (0.3.5)
-  - iAdvize (2.8.4):
-    - Apollo (~> 0.36.0)
-    - Apollo/SQLite
-    - Gifu (~> 3.3.0)
-    - JWTDecode (~> 2.6.3)
-    - SwiftGraylog (~> 1.1.1)
-    - SwiftyMarkdown (~> 1.2.4)
+  - iAdvize (2.9.0):
     - TwilioVideo (~> 4.6)
     - XMPPFramework/Swift (~> 4.0.0)
-  - iadvize-reactnative-sdk (3.0.0):
-    - iAdvize (~> 2.8.4)
+  - iadvize-reactnative-sdk (3.0.1):
+    - iAdvize (~> 2.9.0)
     - React-Core
-  - JWTDecode (2.6.3)
   - KissXML (5.3.1):
     - KissXML/All (= 5.3.1)
   - KissXML/Additions (5.3.1):
@@ -321,11 +307,6 @@ PODS:
     - React-jsi (= 0.70.6)
     - React-logger (= 0.70.6)
     - React-perflogger (= 0.70.6)
-  - SQLite.swift (0.12.2):
-    - SQLite.swift/standard (= 0.12.2)
-  - SQLite.swift/standard (0.12.2)
-  - SwiftGraylog (1.1.1)
-  - SwiftyMarkdown (1.2.4)
   - TwilioVideo (4.6.3)
   - XMPPFramework/default (4.0.0):
     - CocoaAsyncSocket (~> 7.6)
@@ -375,18 +356,12 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - Apollo
     - CocoaAsyncSocket
     - CocoaLumberjack
     - fmt
-    - Gifu
     - iAdvize
-    - JWTDecode
     - KissXML
     - libidn
-    - SQLite.swift
-    - SwiftGraylog
-    - SwiftyMarkdown
     - TwilioVideo
     - XMPPFramework
 
@@ -459,7 +434,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  Apollo: a8dbf1a55e8860bfbe3e4274919721d102c85413
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   CocoaLumberjack: 78abfb691154e2a9df8ded4350d504ee19d90732
@@ -467,11 +441,9 @@ SPEC CHECKSUMS:
   FBLazyVector: 48289402952f4f7a4e235de70a9a590aa0b79ef4
   FBReactNativeSpec: dd1186fd05255e3457baa2f4ca65e94c2cd1e3ac
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  Gifu: 416d4e38c4c2fed012f019e0a1d3ffcb58e5b842
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
-  iAdvize: 8cc856a36726503e3b7785fddfa62ef500b4d709
-  iadvize-reactnative-sdk: 177a6113485266047e72d435a48b15e1edc34768
-  JWTDecode: 33e5e26e5ddbd21b2065820894c08fef0cad9509
+  iAdvize: 69579eea01655be9081180d46f8ccd9c35797c6c
+  iadvize-reactnative-sdk: 353e0dcba363ce41fa13dfb777d11cf7c0293022
   KissXML: 5c8e0f2e8b9f071d3e1ae123dec3eb5da615c10c
   libidn: e4576a956b797c584c77aaedfc6e3dd639b61bdc
   RCT-Folly: 0080d0a6ebf2577475bda044aa59e2ca1f909cda
@@ -500,9 +472,6 @@ SPEC CHECKSUMS:
   React-RCTVibration: c75ceef7aa60a33b2d5731ebe5800ddde40cefc4
   React-runtimeexecutor: 15437b576139df27635400de0599d9844f1ab817
   ReactCommon: 349be31adeecffc7986a0de875d7fb0dcf4e251c
-  SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
-  SwiftGraylog: 4fffb151492baa199e708548ece16f4cf1c75413
-  SwiftyMarkdown: 7cdec87c6ab5cd9ea0e22ced288e889960649ba5
   TwilioVideo: 4afaac028c5886f2f3b313a9fcc146a6b7ca34e2
   XMPPFramework: 5d31ff9f73dce031b24bc49bcf88093627a3a86e
   Yoga: 99caf8d5ab45e9d637ee6e0174ec16fbbb01bcfc

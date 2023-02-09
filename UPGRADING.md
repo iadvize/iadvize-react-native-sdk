@@ -1,3 +1,7 @@
+## 3.0.0 > 3.0.1
+
+*Nothing to report*
+
 ## 2.8.2 > 3.0.0
 
 > *⚠️ This release brings breaking API changes.*`
