@@ -32,7 +32,7 @@ function checkArtifact() {
 
 function updateReleaseFiles() {
   echo -e "\033[1;42m => Updating package.json to target latest SDK\033[0m"
-  sed -i '' "s/\"@iadvize-oss\/iadvize-react-native-sdk\": \"^\(.*\)\",/\"@iadvize-oss\/iadvize-react-native-sdk\": \"^${versionName}\",/" package.json
+  sed -i '' "s/\"@iadvize-oss\/iadvize-react-native-sdk\": \"^\(.*\)\",/\"@iadvize-oss\/iadvize-react-native-sdk\": \"^${versionName}\",/" example/package.json
 
   echo -e "\033[1;42m => Updating CHANGELOG, UPGRADING & README \033[0m"
   mv tmp/CHANGELOG.md CHANGELOG.md
@@ -41,7 +41,7 @@ function updateReleaseFiles() {
 }
 
 function printStartSuccess() {
-  echo -e "\033[1;42m => Release ${newVersionName} is applied! This is what remains for you to do: \033[0m"
+  echo -e "\033[1;42m => Release ${versionName} is applied! This is what remains for you to do: \033[0m"
   echo -e "\033[1;95m - Test the sample project locally with this release \033[0m"
   echo -e "\033[1;95m - Execute './release.sh finish' to continue the release process \033[0m"
 }

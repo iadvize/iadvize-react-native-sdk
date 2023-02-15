@@ -1,3 +1,15 @@
+# 3.0.3
+
+### Release date 2023/02/15
+
+**Features**
+
+- (iOS) Embed XMPPFramwork inside XCFramework artifact (Twilio is now the only external SDK dependency)
+
+**Bug fixes**
+
+- (iOS) Fix bug in framework generation causing upload issues for integrating app
+
 # 3.0.1
 
 ### Release date 2023/02/09

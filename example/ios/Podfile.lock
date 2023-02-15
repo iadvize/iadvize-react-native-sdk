@@ -1,11 +1,5 @@
 PODS:
   - boost (1.76.0)
-  - CocoaAsyncSocket (7.6.5)
-  - CocoaLumberjack (3.8.0):
-    - CocoaLumberjack/Core (= 3.8.0)
-  - CocoaLumberjack/Core (3.8.0)
-  - CocoaLumberjack/Swift (3.8.0):
-    - CocoaLumberjack/Core
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.70.6)
   - FBReactNativeSpec (0.70.6):
@@ -17,21 +11,11 @@ PODS:
     - ReactCommon/turbomodule/core (= 0.70.6)
   - fmt (6.2.1)
   - glog (0.3.5)
-  - iAdvize (2.9.0):
+  - iAdvize (2.10.0):
     - TwilioVideo (~> 4.6)
-    - XMPPFramework/Swift (~> 4.0.0)
-  - iadvize-reactnative-sdk (3.0.1):
-    - iAdvize (~> 2.9.0)
+  - iadvize-reactnative-sdk (3.0.3):
+    - iAdvize (~> 2.10.0)
     - React-Core
-  - KissXML (5.3.1):
-    - KissXML/All (= 5.3.1)
-  - KissXML/Additions (5.3.1):
-    - KissXML/Core
-  - KissXML/All (5.3.1):
-    - KissXML/Additions
-    - KissXML/Core
-  - KissXML/Core (5.3.1)
-  - libidn (1.35)
   - RCT-Folly (2021.07.22.00):
     - boost
     - DoubleConversion
@@ -308,14 +292,6 @@ PODS:
     - React-logger (= 0.70.6)
     - React-perflogger (= 0.70.6)
   - TwilioVideo (4.6.3)
-  - XMPPFramework/default (4.0.0):
-    - CocoaAsyncSocket (~> 7.6)
-    - CocoaLumberjack
-    - KissXML (~> 5.2)
-    - libidn (~> 1.35)
-  - XMPPFramework/Swift (4.0.0):
-    - CocoaLumberjack/Swift
-    - XMPPFramework/default
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -324,7 +300,7 @@ DEPENDENCIES:
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - "iadvize-reactnative-sdk (from `../node_modules/@iadvize-oss/iadvize-react-native-sdk/ios/`)"
+  - "iadvize-reactnative-sdk (from `../node_modules/@iadvize-oss/iadvize-react-native-sdk`)"
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -356,14 +332,9 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - CocoaAsyncSocket
-    - CocoaLumberjack
     - fmt
     - iAdvize
-    - KissXML
-    - libidn
     - TwilioVideo
-    - XMPPFramework
 
 EXTERNAL SOURCES:
   boost:
@@ -377,7 +348,7 @@ EXTERNAL SOURCES:
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   iadvize-reactnative-sdk:
-    :path: "../node_modules/@iadvize-oss/iadvize-react-native-sdk/ios/"
+    :path: "../node_modules/@iadvize-oss/iadvize-react-native-sdk"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -435,17 +406,13 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: a7c83b31436843459a1961bfd74b96033dc77234
-  CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
-  CocoaLumberjack: 78abfb691154e2a9df8ded4350d504ee19d90732
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   FBLazyVector: 48289402952f4f7a4e235de70a9a590aa0b79ef4
   FBReactNativeSpec: dd1186fd05255e3457baa2f4ca65e94c2cd1e3ac
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
-  iAdvize: 69579eea01655be9081180d46f8ccd9c35797c6c
-  iadvize-reactnative-sdk: 353e0dcba363ce41fa13dfb777d11cf7c0293022
-  KissXML: 5c8e0f2e8b9f071d3e1ae123dec3eb5da615c10c
-  libidn: e4576a956b797c584c77aaedfc6e3dd639b61bdc
+  iAdvize: f8718086b6ee275844e54b83058c2b7437861fd3
+  iadvize-reactnative-sdk: ea618c8bc5dd4f738d6b9ee06f4762ce21bdb2cc
   RCT-Folly: 0080d0a6ebf2577475bda044aa59e2ca1f909cda
   RCTRequired: e1866f61af7049eb3d8e08e8b133abd38bc1ca7a
   RCTTypeSafety: 27c2ac1b00609a432ced1ae701247593f07f901e
@@ -473,9 +440,8 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 15437b576139df27635400de0599d9844f1ab817
   ReactCommon: 349be31adeecffc7986a0de875d7fb0dcf4e251c
   TwilioVideo: 4afaac028c5886f2f3b313a9fcc146a6b7ca34e2
-  XMPPFramework: 5d31ff9f73dce031b24bc49bcf88093627a3a86e
   Yoga: 99caf8d5ab45e9d637ee6e0174ec16fbbb01bcfc
 
-PODFILE CHECKSUM: a493c6d731f5fd35af9c7187343edbfbdb229d62
+PODFILE CHECKSUM: 6dd4912ba7fcdf3c58bfe2ff67e9158e205db432
 
 COCOAPODS: 1.11.3
