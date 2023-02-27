@@ -4,7 +4,8 @@
 
 ## 3.0.0 > 3.0.1
 
-*Nothing to report*
+The Kotlin version used in the SDK was updated from `1.7.20` to `1.8.10`. You will need to update your
+Kotlin version accordingly in order for your project to compile.
 
 ## 2.8.2 > 3.0.0
 
