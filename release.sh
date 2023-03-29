@@ -34,10 +34,8 @@ function updateReleaseFiles() {
   echo -e "\033[1;42m => Updating package.json to target latest SDK\033[0m"
   sed -i '' "s/\"@iadvize-oss\/iadvize-react-native-sdk\": \"^\(.*\)\",/\"@iadvize-oss\/iadvize-react-native-sdk\": \"^${versionName}\",/" example/package.json
 
-  echo -e "\033[1;42m => Updating CHANGELOG, UPGRADING & README \033[0m"
-  mv tmp/CHANGELOG.md CHANGELOG.md
-  mv tmp/UPGRADING.md UPGRADING.md
-  mv tmp/README.md README.md
+  echo -e "\033[1;42m => Updating CHANGELOG & UPGRADING & README & SUPPORT. \033[0m"
+  mv tmp/*.md .
 }
 
 function printStartSuccess() {
