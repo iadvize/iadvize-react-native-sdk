@@ -1,3 +1,18 @@
+# 3.1.0
+
+### Release date 2023/03/29
+
+**Features**
+
+- Disable satisfaction survey after failed bot transfer if parametrized in the admin
+- Handle the Estimated Waiting Time messages
+
+**Bug fixes**
+
+- (Android) Fix pre-conversation custom data not being sent on conversation start
+- (Android) Fix targeting process not being fully restarted after conversation end
+- (Android) Fix build issue with wrong Kotlin version variable
+
 # 3.0.3
 
 ### Release date 2023/02/15

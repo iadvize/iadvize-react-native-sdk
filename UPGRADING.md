@@ -1,6 +1,17 @@
-## 3.0.1 > 3.0.3
+## 3.0.3 > 3.1.0
 
 *Nothing to report*
+
+## 3.0.1 > 3.0.3
+
+Before version 3.0.3 it was necessary to add a line in the ios app `Podfile` to locate the iAdvize SDK podspec: 
+
+```
+pod 'iadvize-reactnative-sdk', :path => '../node_modules/@iadvize-oss/iadvize-react-native-sdk/ios/'
+```
+
+This was because our podspec file was not located on the right repository. It is fixed now in the 3.0.3 release so this line is no longer needed as ReactNative can find it automatically, and you will have to remove it in order for the `pod install` command to work.
+
 
 ## 3.0.0 > 3.0.1
 

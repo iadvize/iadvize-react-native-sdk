@@ -1075,10 +1075,10 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
-"@iadvize-oss/iadvize-react-native-sdk@^3.0.3":
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/@iadvize-oss/iadvize-react-native-sdk/-/iadvize-react-native-sdk-3.0.3.tgz#b47686b75751361a054c0951a720c504820b346c"
-  integrity sha512-vPMcAuD0tO1kmN7MSQudmW3LnMqB+XlYTK0/n1UeEeAquRo0L1SjRaGCkkeeJyh5UZsRm13Gg7hZXyKTVQfIMQ==
+"@iadvize-oss/iadvize-react-native-sdk@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@iadvize-oss/iadvize-react-native-sdk/-/iadvize-react-native-sdk-3.1.0.tgz#7722510b0e8b34dd9d9a49466ca4c5b6938211e6"
+  integrity sha512-y0wYxOi3xbRwYejc7+HXq3+gtO+OHMzxo/oy3UaDhZzx1nzfIjFIDLnIRUVkLh8SnU1AbrGfqk/sWHchU54z/w==
 
 "@iarna/toml@2.2.5":
   version "2.2.5"
