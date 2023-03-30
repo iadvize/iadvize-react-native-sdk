@@ -1,3 +1,11 @@
+# 3.1.1
+
+### Release date 2023/03/30
+
+**Bug fixes**
+
+- (Android)) Fix message alignment
+
 # 3.1.0
 
 ### Release date 2023/03/29
