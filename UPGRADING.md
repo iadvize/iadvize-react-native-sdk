@@ -1,3 +1,9 @@
+## 3.1.1 > 3.2.0
+
+From this release and onward, the possibility to upload files in the conversation is based on the option
+available in the Admin Chatbox Builder. To enable/disable it go to your iAdvize Administration Panel then :
+> Engagement > Notifications & Chatbox > Chatbox (Customize) > Composition box (tab) > Allow the visitor to upload images and pdf
+
 ## 3.1.0 > 3.1.1
 
 *Nothing to report*
