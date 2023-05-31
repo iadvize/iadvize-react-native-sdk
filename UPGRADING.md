@@ -1,3 +1,7 @@
+## 3.2.0 > 3.2.1
+
+*Nothing to report*
+
 ## 3.1.1 > 3.2.0
 
 From this release and onward, the possibility to upload files in the conversation is based on the option

@@ -1,3 +1,12 @@
+# 3.2.1
+
+### Release date 2023/05/31
+
+**Bug fixes**
+
+- (iOS) Fix video conversation flow wrongly changing the conversation channel
+- Fix font update on several message types
+
 # 3.2.0
 
 ### Release date 2023/05/25
@@ -11,7 +20,7 @@
 - (iOS) Fix camera still opening after manual permission removal
 - (iOS) Fix targeting listener not being triggered when there is an ongoing conversation
 - (iOS) Fix ongoing conversation being returned as true after closing a video conversation
-- (Android)) Fix message alignment
+- (Android) Fix message alignment
 
 # 3.1.1
 

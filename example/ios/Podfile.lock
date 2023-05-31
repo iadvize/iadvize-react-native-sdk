@@ -11,10 +11,10 @@ PODS:
     - ReactCommon/turbomodule/core (= 0.70.6)
   - fmt (6.2.1)
   - glog (0.3.5)
-  - iAdvize (2.12.0):
+  - iAdvize (2.12.1):
     - TwilioVideo (~> 4.6)
-  - iadvize-reactnative-sdk (3.2.0):
-    - iAdvize (~> 2.12.0)
+  - iadvize-reactnative-sdk (3.2.1):
+    - iAdvize (~> 2.12.1)
     - React-Core
   - RCT-Folly (2021.07.22.00):
     - boost
@@ -411,8 +411,8 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: dd1186fd05255e3457baa2f4ca65e94c2cd1e3ac
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
-  iAdvize: 5f2994c8df6303691635694ef1cad36292380005
-  iadvize-reactnative-sdk: e72e819ca7467a6ed162ca518dedad15d3f96ac6
+  iAdvize: 7f9382934923a2b9fa07333c01d0954b3fff2b12
+  iadvize-reactnative-sdk: aeaf5a1e026144aa859b523a35b2ef1a8296254b
   RCT-Folly: 0080d0a6ebf2577475bda044aa59e2ca1f909cda
   RCTRequired: e1866f61af7049eb3d8e08e8b133abd38bc1ca7a
   RCTTypeSafety: 27c2ac1b00609a432ced1ae701247593f07f901e
