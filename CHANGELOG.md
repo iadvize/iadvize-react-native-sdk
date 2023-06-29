@@ -1,3 +1,17 @@
+# 3.2.2
+
+### Release date 2023/06/29
+
+**Features**
+
+- ReactNative 0.72 support
+
+**Bug fixes**
+
+- (iOS) Fix threading issue for `presentChabtox` API
+- (iOS) Fix behavior of `setDefaultFloatingButton` API
+- (Android) Fix `ChatboxConfiguration.mainColor` defaulting to white if not set
+
 # 3.2.1
 
 ### Release date 2023/05/31
