@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { StyleSheet, Image, Linking, View, Button, SegmentedControlIOSBase } from 'react-native';
+import { StyleSheet, Image, Linking, View, Button } from 'react-native';
 import IAdvizeSDK, {
   IAdvizeSDKListeners,
   LogLevel,

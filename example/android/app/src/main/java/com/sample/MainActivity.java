@@ -35,7 +35,6 @@ public class MainActivity extends ReactActivity {
       return new ReactRootView(getContext());
     }
 
-    @Override
     protected boolean isConcurrentRootEnabled() {
       return false;
     }

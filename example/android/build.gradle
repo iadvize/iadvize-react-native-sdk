@@ -2,20 +2,15 @@
 
 buildscript {
     ext {
-        buildToolsVersion = "33.0.1"
+        buildToolsVersion = "33.0.2"
         minSdkVersion = 21
         compileSdkVersion = 33
         targetSdkVersion = 33
-        kotlinVersion = "1.8.10"
-        gradleVersion = "7.4.1"
+        kotlinVersion = "1.8.21"
+        gradleVersion = "7.4.2"
 
-        if (System.properties['os.arch'] == "aarch64") {
-            // For M1 Users we need to use the NDK 24 which added support for aarch64
-            ndkVersion = "24.0.8215888"
-        } else {
-            // Otherwise we default to the side-by-side NDK version from AGP.
-            ndkVersion = "21.4.7075529"
-        }
+        // We use NDK 23 which has both M1 support and is the side-by-side NDK version from AGP.
+        ndkVersion = "23.1.7779620"
     }
     repositories {
         google()
