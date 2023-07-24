@@ -1,3 +1,13 @@
+# 3.2.3
+
+### Release date 2023/07/24
+
+**Bug fixes**
+
+- Fix wrong type of `isActiveTargetingRuleAvailable` (`number` -> `boolean`)
+- Fix missing header in iOS bridge
+
+
 # 3.2.2
 
 ### Release date 2023/06/29

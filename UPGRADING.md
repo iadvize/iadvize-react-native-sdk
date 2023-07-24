@@ -1,3 +1,7 @@
+## 3.2.2 > 3.2.3
+
+The addition of the missing header in the iOS bridge should allow you to use the ReactNative SDK plugin as a static library, thus allowing you to remove the `use_frameworks!` directive from your iOS `Podfile`.
+
 ## 3.2.1 > 3.2.2
 
 *Nothing to report*

@@ -66,3 +66,4 @@ example/vendor/bundle/
 # iAdvize artifacts
 IAdvizeSDK.zip
 tmp/
+example-backup/
