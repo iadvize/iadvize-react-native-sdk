@@ -1,3 +1,10 @@
+## 3.2.3 > 3.3.0
+
+This release deprecates the ChatboxConfiguration.mainColor setting and adds new ways to customize the look and feel of the messages, both the ones from the visitor and the ones from the agent. Please review the new parameters to customize them to your liking.
+
+This release adds a new LogLevel.NONE to disable all console logs and all logging capture. Please note that this disables iAdvize functional logs aggregation as well so debugging issues will be made harder if this mode is chosen.
+
+
 ## 3.2.2 > 3.2.3
 
 The addition of the missing header in the iOS bridge should allow you to use the ReactNative SDK plugin as a static library, thus allowing you to remove the `use_frameworks!` directive from your iOS `Podfile`.
