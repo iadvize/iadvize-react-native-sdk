@@ -93,15 +93,22 @@ export default function App() {
 
   const setChatboxConfiguration = async () => {
     const configuration: ChatboxConfiguration = {
-      mainColor: '#000000',
-      navigationBarBackgroundColor: '#000000',
-      navigationBarMainColor: '#00FF00',
-      navigationBarTitle: 'Conversation',
       fontName: 'AmericanTypewriter-Condensed',
       fontSize: 11,
       fontPath: '/',
+
+      incomingMessageBackgroundColor: '#EEEFF0',
+      incomingMessageTextColor: '#34393F',
+      outgoingMessageBackgroundColor: '#320087',
+      outgoingMessageTextColor: '#EEEFF0',
+      accentColor: '#FFBF32',
+
+      navigationBarBackgroundColor: '#FFBF32',
+      navigationBarMainColor: '#320087',
+      navigationBarTitle: 'Toolbar custom title',
+
       automaticMessage: 'Hello! Please ask your question :)',
-      gdprMessage: 'Your own GDPR message.',
+      gdprMessage: 'Your own custom GDPR message.',
       incomingMessageAvatarImageName: Image.resolveAssetSource(require('./test.jpeg')).uri, // Will take precedence over AvatarURL
       incomingMessageAvatarURL: 'https://picsum.photos/200/200',
     };
