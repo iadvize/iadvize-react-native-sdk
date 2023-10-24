@@ -1,4 +1,25 @@
-# 3.3.0
+# 3.4.0 (Cantal)
+
+### Release date 2023/10/24
+
+**Features**
+
+- Add automatic auth token refresh management
+- Remove preview image when it is empty (previously used a placeholder)
+- Add `onChatboxOpened` & `onChatboxClosed` API
+
+**Bug fixes**
+
+- Fix web & markdown links display
+- (iOS) Fix QuickReplies hit detection when no avatar is set
+- (iOS) Review of Chatbox APIs computation on main UI thread
+
+**Dependencies**
+
+- (iOS) Xcode target `14.2` -> `15.0`
+- (Android) Gradle Plugin `8.1.0` -> `8.1.1`
+
+# 3.3.0 (Beaufort)
 
 ### Release date 2023/08/09
 
@@ -19,7 +40,7 @@
 - (Android) Build Tools `33.0.1` -> `33.0.2`
 - (Android) Kotlin `1.8.10` -> `1.8.21`
 
-# 3.2.3
+# 3.2.3 (Angelot)
 
 ### Release date 2023/07/24
 
@@ -28,8 +49,7 @@
 - Fix wrong type of `isActiveTargetingRuleAvailable` (`number` -> `boolean`)
 - Fix missing header in iOS bridge
 
-
-# 3.2.2
+# 3.2.2 (Angelot)
 
 ### Release date 2023/06/29
 
@@ -43,7 +63,7 @@
 - (iOS) Fix behavior of `setDefaultFloatingButton` API
 - (Android) Fix `ChatboxConfiguration.mainColor` defaulting to white if not set
 
-# 3.2.1
+# 3.2.1 (Angelot)
 
 ### Release date 2023/05/31
 
@@ -52,7 +72,7 @@
 - (iOS) Fix video conversation flow wrongly changing the conversation channel
 - Fix font update on several message types
 
-# 3.2.0
+# 3.2.0 (Angelot)
 
 ### Release date 2023/05/25
 

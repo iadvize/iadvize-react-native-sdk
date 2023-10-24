@@ -41,6 +41,14 @@ export default function App() {
       Linking.openURL(eventData.uri);
     });
 
+    IAdvizeSDKListeners.onChatboxOpened(function (eventData: any) {
+      console.log('onChatboxOpened', eventData);
+    });
+
+    IAdvizeSDKListeners.onChatboxClosed(function (eventData: any) {
+      console.log('onChatboxClosed', eventData);
+    });
+
   }, []);
 
   const activateSDK = async () => {

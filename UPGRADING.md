@@ -1,3 +1,16 @@
+## 3.3.0 > 3.4.0
+
+Chatbox APIs were added in order for the integrator to know when the Chatbox is opened & closed.
+```
+IAdvizeSDKListeners.onChatboxOpened(function (eventData: any) {
+  console.log('onChatboxOpened', eventData);
+});
+
+IAdvizeSDKListeners.onChatboxClosed(function (eventData: any) {
+  console.log('onChatboxClosed', eventData);
+});
+```
+
 ## 3.2.3 > 3.3.0
 
 This release deprecates the ChatboxConfiguration.mainColor setting and adds new ways to customize the look and feel of the messages, both the ones from the visitor and the ones from the agent. Please review the new parameters to customize them to your liking.
