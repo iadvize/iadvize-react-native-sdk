@@ -1,3 +1,7 @@
+## 3.4.0 > 3.4.1
+
+*Nothing to report*
+
 ## 3.3.0 > 3.4.0
 
 Chatbox APIs were added in order for the integrator to know when the Chatbox is opened & closed.

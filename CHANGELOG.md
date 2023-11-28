@@ -1,3 +1,30 @@
+# 3.4.1 (Cantal)
+
+### Release date 2023/11/28
+
+**Features**
+
+- (iOS) Support multiline in QuickReply choices
+
+**Bug fixes**
+
+- (Android) Fix potential stuck state during GDPR process
+- (Android) Fix conversation not being started properly if network disconnects during MUC/SUB subscription
+- (Android) Remove OnBackPressedHandler which was causing issues in ReactNative back button handling
+- (iOS) Add missing completion call on secured auth activation failure callback
+- (iOS) Fix conversation closing regression caused by the token refresh strategy
+
+**Dependencies**
+
+The iAdvize SDK Android plugin dependencies were aligned to use React Native `0.72.7` default dependencies to avoid build conflicts:
+
+- React `18.2.0`
+- Kotlin `1.7.22`
+- Gradle `8.0.1`
+- Android Gradle Plugin `7.4.2`
+- Android SDK Target `34`
+- Android SDK Build Tools `34.0.0`
+
 # 3.4.0 (Cantal)
 
 ### Release date 2023/10/24
