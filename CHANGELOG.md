@@ -1,6 +1,6 @@
-# 3.4.1 (Cantal)
+# 3.4.2
 
-### Release date 2023/11/28
+### Release date 2023/12/06
 
 **Features**
 
@@ -20,10 +20,15 @@ The iAdvize SDK Android plugin dependencies were aligned to use React Native `0.
 
 - React `18.2.0`
 - Kotlin `1.7.22`
-- Gradle `8.0.1`
-- Android Gradle Plugin `7.4.2`
-- Android SDK Target `34`
-- Android SDK Build Tools `34.0.0`
+- Gradle `7.6`
+- Android Gradle Plugin `7.4.1`
+- Android minimum SDK `33`
+- Android SDK Target `33`
+- Android SDK Build Tools `33.0.2`
+
+# 3.4.1 (Cantal)
+
+This version was discontinued due to build issues. Please use the version `3.4.2`.
 
 # 3.4.0 (Cantal)
 
