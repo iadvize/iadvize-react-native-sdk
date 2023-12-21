@@ -1,3 +1,22 @@
+# 3.4.3
+
+### Release date 2023/12/21
+
+**Features**
+
+- Support simple Markdown syntax inside QuickReply messages
+- Add some translations for GDPR messages (cs, da, pl, sk, sv)
+- Add API to unset GDPR & Secured Auth listeners
+
+**Bug fixes**
+
+- (Android) Fix a display issue on ProductOffer messages when no offer pric is set
+- (iOS) Fix GDPR mode not updating after multiple activations
+
+**Dependencies**
+
+- (Android) Removed deprecated `play-services-safetynet` dependency in favor of `play-services-basement`
+
 # 3.4.2
 
 ### Release date 2023/12/06

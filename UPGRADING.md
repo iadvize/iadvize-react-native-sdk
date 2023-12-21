@@ -1,3 +1,12 @@
+## 3.4.2 > 3.4.3
+
+APIs were added in order for the integrator to unset the GDPR or secured auth listeners:
+
+```
+IAdvizeSDKListeners.unsetJWEProvider();
+IAdvizeSDKListeners.unsetGDPRMoreInfoClickedListener();
+```
+
 ## 3.4.0 > 3.4.2
 
 *Nothing to report*
@@ -5,6 +14,7 @@
 ## 3.3.0 > 3.4.0
 
 Chatbox APIs were added in order for the integrator to know when the Chatbox is opened & closed.
+
 ```
 IAdvizeSDKListeners.onChatboxOpened(function (eventData: any) {
   console.log('onChatboxOpened', eventData);
