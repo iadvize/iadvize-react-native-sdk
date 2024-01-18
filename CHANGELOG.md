@@ -1,4 +1,18 @@
-# 3.4.3
+# 3.4.4 (Cantal)
+
+### Release date 2024/01/18
+
+**Features**
+
+- Clear iAdvize Push Notifications on chatbox opening
+- Add an API for clearing iAdvize Push Notifications on demand
+
+**Bug fixes**
+
+- (iOS) Fix a UI thread crash when displaying error view
+- (iOS) Fix the default browser opening on link clicks
+
+# 3.4.3 (Cantal)
 
 ### Release date 2023/12/21
 
@@ -17,7 +31,7 @@
 
 - (Android) Removed deprecated `play-services-safetynet` dependency in favor of `play-services-basement`
 
-# 3.4.2
+# 3.4.2 (Cantal)
 
 ### Release date 2023/12/06
 
