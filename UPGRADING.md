@@ -15,7 +15,7 @@ Then, when receiving a push notification, in order to display it via your usual 
 ```
 IAdvizeSDK.notificationChannelId();
 ```
-Here as well this API does nothing on Android (it returns an empty string).
+Here as well this API does nothing on iOS (it returns an empty string).
 
 In order to know how to specify the notification channel id when displaying the push notification, please refer to the documentation of your notification library.
 
