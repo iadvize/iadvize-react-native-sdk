@@ -1,6 +1,8 @@
 package com.example;
 
 import android.app.Application;
+import android.util.Log;
+import androidx.annotation.NonNull;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -60,6 +62,16 @@ public class MainApplication extends Application implements ReactApplication {
     }
     ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
 
-    IAdvizeSDK.initiate(this);
+    IAdvizeSDK.initiate(this, new IAdvizeSDK.Callback() {
+      @Override
+      public void onSuccess() {
+          Log.v("MainApplication", "IAdvizeSDK successfully initialized");
+      }
+
+      @Override
+      public void onFailure(@NonNull Throwable throwable) {
+          Log.e("MainApplication", "Error while initializing IAdvizeSDK");
+      }
+    });
   }
 }

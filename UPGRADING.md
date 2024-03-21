@@ -1,3 +1,26 @@
+## 3.4.4 > 3.4.5
+
+The `initiate` API now has a IAdvizeSDK.Callback as an optional argument to inform the host app if it fails.
+The Android SDK is developped in Kotlin, but the ReactNative wrappers are developped in Java, that means that this optional argument,
+although not necessary in Kotlin, has to be set in Java.
+Thus  it is needed to specify this argument when calling the initaite method:
+```
+IAdvizeSDK.initiate(this, new IAdvizeSDK.Callback() {
+    @Override
+    public void onSuccess() {
+        Log.v("MainApplication", "IAdvizeSDK successfully initialized");
+    }
+
+    @Override
+    public void onFailure(@NonNull Throwable throwable) {
+        Log.e("MainApplication", "Error while initializing IAdvizeSDK");
+    }
+});
+```
+
+Please note that before calling the callback failure method, the API will first retry once, so if the callback failure is called it 
+means the API has failed twice to initiate the SDK.
+
 ## 3.4.3 > 3.4.4
 
 In this release the Push Notification APIs has been enhanced so that you can now clear the iAdvize Push Notifications on demand.
