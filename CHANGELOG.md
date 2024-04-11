@@ -1,3 +1,11 @@
+# 3.4.7 (Cantal)
+
+### Release date 2024/04/11
+
+**Bug fixes**
+
+- (Android) Fix secured preferences initialization issue in case of modified decryption key
+
 # 3.4.6 (Cantal)
 
 ### Release date 2024/04/09
