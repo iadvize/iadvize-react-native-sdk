@@ -1,3 +1,24 @@
+## 3.4.7 > 4.0.0
+
+In previous versions the Secured Auth callback was synchronous (waiting for a direct return). This was not intended.
+This version fixes it by making the flow asynchronous. Here is the updated flow:
+
+```
+// To activate Secured Auth, first set the onJWERequested listener
+IAdvizeSDKListeners.onJWERequested(function (eventData: any) {
+  console.log('onJWERequested' + ' ' + eventData);
+
+  // TODO Fetch JWE from your 3rd-party auth system
+});
+// Activate the SDK as usual
+await IAdvizeSDK.activate(projectId, '', ...);
+
+
+
+// When the JWE is fetched, you must call this API to proceed:
+IAdvizeSDK.provideJWE(jwe);
+```
+
 ## 3.4.6 > 3.4.7
 
 *Nothing to report*

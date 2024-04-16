@@ -1,3 +1,11 @@
+# 4.0.0
+
+### Release date 2024/04/16
+
+**Features**
+
+- Fixed the Secured Authentication flow being wrongly synchronous. This is a breaking API change, thus the major version update.
+
 # 3.4.7 (Cantal)
 
 ### Release date 2024/04/11
