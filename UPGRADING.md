@@ -1,3 +1,7 @@
+## 4.0.0 > 4.0.1
+
+*Nothing to report*
+
 ## 3.4.7 > 4.0.0
 
 In previous versions the Secured Auth callback was synchronous (waiting for a direct return). This was not intended.

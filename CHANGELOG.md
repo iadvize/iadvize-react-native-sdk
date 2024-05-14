@@ -1,3 +1,12 @@
+# 4.0.1
+
+### Release date 2024/05/14
+
+**Bug fixes**
+
+- Fix line feed escaping breaking markdown syntax in bot messages
+- (Android) Fix text selection breaking markdown link handling
+
 # 4.0.0
 
 ### Release date 2024/04/16
