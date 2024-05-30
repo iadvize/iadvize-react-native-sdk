@@ -68,7 +68,13 @@ export default function App() {
   };
 
   const logout = async () => {
-    IAdvizeSDK.logout();
+    try {
+      await IAdvizeSDK.logout();
+      console.log('Successfully logged out of iAdvize SDK');
+    } catch (e) {
+      console.log('Error while logging out of iAdvize SDK');
+      console.error(e);
+    }
   };
 
   const registerUserNavigation = async () => {
