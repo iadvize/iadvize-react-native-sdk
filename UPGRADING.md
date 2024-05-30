@@ -1,3 +1,17 @@
+## 4.0.1 > 4.0.2
+
+This release adds a missing callback to the `logout` API. It now returns a `Promise<boolean>`:
+
+```
+try {
+  await IAdvizeSDK.logout();
+  console.log('Successfully logged out of iAdvize SDK');
+} catch (e) {
+  console.log('Error while logging out of iAdvize SDK');
+  console.error(e);
+}
+```
+
 ## 4.0.0 > 4.0.1
 
 *Nothing to report*

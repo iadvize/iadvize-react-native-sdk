@@ -75,7 +75,7 @@ PODS:
   - hermes-engine/Pre-built (0.72.7)
   - iAdvize (2.14.5):
     - TwilioVideo (~> 4.6)
-  - iadvize-reactnative-sdk (4.0.1):
+  - iadvize-reactnative-sdk (4.0.2):
     - iAdvize (~> 2.14.5)
     - React-Core
   - libevent (2.1.12)
@@ -682,7 +682,7 @@ SPEC CHECKSUMS:
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   hermes-engine: 9180d43df05c1ed658a87cc733dc3044cf90c00a
   iAdvize: 73737fd33024ffbceccad55b579cd85e3aef4237
-  iadvize-reactnative-sdk: 81238db288c535a959d0eed6aef81ba7f1dd27d5
+  iadvize-reactnative-sdk: dd95c77e2c5e86b926ce24a806b18d2186da8b67
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1

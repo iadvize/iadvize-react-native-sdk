@@ -1,4 +1,13 @@
-# 4.0.1
+# 4.0.2 (Cantal)
+
+### Release date 2024/05/30
+
+**Bug fixes**
+
+- Add missing callback on `logout` API
+- (Android) Fix isolated markdown deeplink handling
+
+# 4.0.1 (Cantal)
 
 ### Release date 2024/05/14
 
@@ -7,7 +16,7 @@
 - Fix line feed escaping breaking markdown syntax in bot messages
 - (Android) Fix text selection breaking markdown link handling
 
-# 4.0.0
+# 4.0.0 (Cantal)
 
 ### Release date 2024/04/16
 
