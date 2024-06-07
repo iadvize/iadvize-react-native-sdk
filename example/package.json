@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@iadvize-oss/iadvize-react-native-sdk": "^4.0.2",
+    "@iadvize-oss/iadvize-react-native-sdk": "^4.0.3",
     "react": "18.2.0",
     "react-native": "0.72.7",
     "stacktrace-parser": "^0.1.10"

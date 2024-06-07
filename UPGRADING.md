@@ -1,3 +1,7 @@
+## 4.0.2 > 4.0.3
+
+*Nothing to report*
+
 ## 4.0.1 > 4.0.2
 
 This release adds a missing callback to the `logout` API. It now returns a `Promise<boolean>`:
