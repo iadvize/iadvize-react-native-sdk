@@ -1,3 +1,11 @@
+# 4.1.0 (Dauphin)
+
+### Release date 2024/06/13
+
+**Features**
+
+- Migrate the XMPP messaging architecture from MUC/SUB to classic MUC
+
 # 4.0.3 (Cantal)
 
 ### Release date 2024/06/07
