@@ -1,3 +1,13 @@
+# 4.1.4
+
+### Release date 2024/07/13
+
+**Bug fixes**
+
+- Fix duplication of native bridge
+- (iOS) Fix certain cases of authentication deadlock
+- (iOS) Fix keychain error impacting transactions and video
+
 # 4.1.3 (Dauphin)
 
 ### Release date 2024/07/03
