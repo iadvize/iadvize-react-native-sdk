@@ -1,4 +1,12 @@
-# 4.1.4
+# 4.1.5 (Dauphin)
+
+### Release date 2024/08/13
+
+**Features**
+
+- (Android) Fix default floating button color update
+
+# 4.1.4 (Dauphin)
 
 ### Release date 2024/07/13
 
