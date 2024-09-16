@@ -55,5 +55,7 @@
     <string>This application will use the camera to share photos and during video calls.</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>This application will use the microphone during video calls.</string>
+    <key>UIUserInterfaceStyle</key>
+    <string>Light</string>
 </dict>
 </plist>

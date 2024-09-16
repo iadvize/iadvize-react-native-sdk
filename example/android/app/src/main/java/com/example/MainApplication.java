@@ -3,6 +3,7 @@ package com.example;
 import android.app.Application;
 import android.util.Log;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -73,5 +74,7 @@ public class MainApplication extends Application implements ReactApplication {
           Log.e("MainApplication", "Error while initializing IAdvizeSDK");
       }
     });
+
+    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
   }
 }
