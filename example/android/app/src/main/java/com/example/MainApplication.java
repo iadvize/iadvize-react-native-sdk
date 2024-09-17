@@ -69,7 +69,7 @@ public class MainApplication extends Application implements ReactApplication {
       }
 
       @Override
-      public void onFailure(@NonNull Throwable throwable) {
+      public void onFailure(@NonNull IAdvizeSDK.Error error) {
           Log.e("MainApplication", "Error while initializing IAdvizeSDK");
       }
     });

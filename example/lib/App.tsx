@@ -26,6 +26,10 @@ export default function App() {
       console.log('onActiveTargetingRuleAvailabilityChanged', eventData);
     });
 
+    IAdvizeSDKListeners.onActiveTargetingRuleAvailabilityUpdateFailed(function (eventData: any) {
+      console.log('onActiveTargetingRuleAvailabilityUpdateFailed', eventData.code, "=>", eventData.message);
+    });
+
     IAdvizeSDKListeners.onOngoingConversationStatusChanged(function (eventData: any) {
       console.log('onOngoingConversationStatusChanged', eventData);
     });
@@ -159,6 +163,11 @@ export default function App() {
     console.log(`iAdvize SDK conversationChannel: ${ convChannel }`);
   };
 
+  const debugInfo = async () => {
+    const debugInfo = IAdvizeSDK.debugInfo();
+    console.log(`Debug info: ${ debugInfo }`);
+  };
+
   return (
     <View style={styles.container}>
       <Button title="Activate" onPress={() => activateSDK()} />
@@ -211,6 +220,11 @@ export default function App() {
         title="Print Conversation Channel"
         onPress={() => ongoingConversationChannel()}
       />
+      <View style={styles.margin} />
+      <Button
+        title="Print Debug Info"
+        onPress={() => debugInfo()}
+      />
     </View>
   );
 }
@@ -222,6 +236,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   margin: {
-    height: 10,
+    height: 8,
   },
 });
