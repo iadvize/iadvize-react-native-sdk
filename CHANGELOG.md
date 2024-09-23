@@ -1,3 +1,11 @@
+# 4.2.1 (Epoisses)
+
+### Release date 2024/09/23
+
+**Bug fixes**
+
+- (Android) Fix obfuscation folder conflict with external libraries
+
 # 4.2.0 (Epoisses)
 
 ### Release date 2024/09/17
