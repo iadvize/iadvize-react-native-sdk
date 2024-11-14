@@ -1,3 +1,20 @@
+## 4.2.1 > 4.2.2
+
+This versions updates several build system dependencies:
+
+- React Native 0.75.4
+- React 18.3.1
+- Android SDK 35
+- Kotlin 2.0
+- Gradle 8.10
+- Android Gradle Plugin 8.6
+- iOS 18
+- Xcode 16
+
+Please note that the minimum OS requirements have evolved with this version:
+- minimum Android supported version is now Android 7 (SDK 24)
+- minimum iOS supported version is now 13.4
+
 ## 4.2.0 > 4.2.1
 
 *Nothing to report*
@@ -6,8 +23,7 @@
 
 ### Debug Info
 
-This releases adds a new `debugInfo` API that returns the status of the SDK at any given moment. This API could be used for debugging
-purposes, you can add the JSON string output to your log reporting tool.
+This releases adds a new `debugInfo` API that returns the status of the SDK at any given moment. This API could be used for debugging purposes, you can add the JSON string output to your log reporting tool.
 
 ```
 const debugInfo = IAdvizeSDK.debugInfo();

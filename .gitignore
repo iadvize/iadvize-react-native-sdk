@@ -37,6 +37,7 @@ local.properties
 example/node_modules/
 npm-debug.log
 yarn-error.log
+.yarn/
 
 # BUCK
 buck-out/
@@ -67,5 +68,3 @@ example/vendor/bundle/
 IAdvizeSDK.zip
 tmp/
 example-backup/
-
-*.lock

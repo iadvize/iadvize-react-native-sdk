@@ -1,3 +1,24 @@
+# 4.2.2 (Epoisses)
+
+### Release date 2024/11/08
+
+**Features**
+
+- (Android) Migrate to Android permission-less Photo Picker
+- (iOS) Add Privacy Manifest
+
+**Bug fixes**
+
+- (Android) Fix crash when opening downloaded files
+- (iOS) Fix hangs or crashs that could occur when initializing the SDK
+- (iOS) Fix rare crash caused by bad date formatting
+
+**Dependencies**
+
+- Update to React Native 0.75.4 / React 18.3.1
+- (Android) Update to Android 35 / Kotlin 2 / Gradle 8.10 / AGP 8.6
+- (iOS) Update to iOS 18 / Xcode 16
+
 # 4.2.1 (Epoisses)
 
 ### Release date 2024/09/23
