@@ -1,3 +1,7 @@
+## 4.2.2 > 4.2.3
+
+*Nothing to report*
+
 ## 4.2.1 > 4.2.2
 
 This versions updates several build system dependencies:

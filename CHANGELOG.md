@@ -1,3 +1,11 @@
+# 4.2.3 (Epoisses)
+
+### Release date 2024/11/21
+
+**Bug fixes**
+
+- Fix missing typescript definitions in package
+
 # 4.2.2 (Epoisses)
 
 ### Release date 2024/11/08
