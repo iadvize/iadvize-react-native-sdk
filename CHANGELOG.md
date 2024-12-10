@@ -1,3 +1,33 @@
+# 4.2.4 (Epoisses)
+
+### Release date 2024/12/10
+
+**Features**
+
+- (Android) Updated UI to new product carrousel design
+
+**Bug fixes**
+
+- Fix TalkBack focus issue in message list
+- Fix push notifications not being enabled on follow-up activations (see explanation below)
+- (iOS) Fix useless calls performed after logout (access token refresh attempts).
+- (iOS) Fix wrong font used in navigation bar title when using a custom font.
+- (iOS) Fix inconsistent font size in messages when using a custom font.
+- (iOS) Fix watchdog terminations caused by main thread being blocked by XMPP.
+- (iOS) Fix wrong availability displayed in product card when a new message is received.
+
+____
+
+**Automatic Push Notifications Handling**
+
+Push notifications are now **automatically enabled** every time a visitor is activated using IAdvizeSDK.activate(projectId:authenticationOption:gdprOption:completion:).
+
+  - Previously, push notifications were only enabled during the first activation. After logout, they were disabled, requiring manual re-enablement on subsequent activations.
+
+  - Now, push notifications will automatically re-enable during every activation, regardless of whether it’s the visitor’s first or a subsequent activation.
+
+You only need to call IAdvizeSDK.enablePushNotifications if you previously disabled them using IAdvizeSDK.disablePushNotifications.
+
 # 4.2.3 (Epoisses)
 
 ### Release date 2024/11/21
