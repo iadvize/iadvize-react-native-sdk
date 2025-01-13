@@ -1,3 +1,17 @@
+# 4.2.5 (Epoisses)
+
+### Release date 2025/01/10
+
+**Updated**
+
+- (iOS) Update TwilioVideo to remove bitcode.
+
+The iAdvize SDK had an obsolete dependency on the TwilioVideo framework, which still included bitcode. This could cause problems when submitting your application to AppStore Connect. The dependency has now been updated to the latest version (5.8.3), which no longer contains bitcode. 
+
+**Bug fixes**
+
+- Fix crash when initializing video call on iOS 18.
+
 # 4.2.4 (Epoisses)
 
 ### Release date 2024/12/10
