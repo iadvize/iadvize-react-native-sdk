@@ -1,3 +1,21 @@
+## 4.2.6 > 4.3.0
+
+**Smaller Chatbox**
+
+The Chatbox can now be presented in a compact mode, the visitor can resize the chatbox manually by dragging the toolbar.
+The chatbox is automatically expanded when the keyboard opens. This compact mode can be enabled by using a flag in the `ChatboxConfiguration`:
+
+```
+const configuration: ChatboxConfiguration = {
+  ...
+
+  isSmallerChatboxEnabled: true,
+
+  ...
+};
+IAdvizeSDK.setChatboxConfiguration(configuration);
+```
+
 ## 4.2.5 > 4.2.6
 
 *Nothing to report*

@@ -1,3 +1,17 @@
+# 4.3.0 (Fourme)
+
+### Release date 2025/02/20
+
+**Features**
+
+- Add `ChatboxConfiguration.isSmallerChatboxEnabled` API to present the Chatbox in compact mode. 
+
+**Bug fixes**
+
+- (iOS) Fix Auto Layout warnings displayed in the console.
+- (Android) Fix default floating button insets for Android 15
+- (Android) Fix some intempestive logs related to tracking & coroutines
+
 # 4.2.6 (Epoisses)
 
 ### Release date 2025/02/03
