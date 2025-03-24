@@ -49,8 +49,8 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSCameraUsageDescription</key>
-    <string>This application will use the camera to share photos and during video calls.</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>This application will use the microphone during video calls.</string>
+	<string>This application will use the camera to share photos and during video calls.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This application will use the microphone during video calls.</string>
 </dict>
 </plist>

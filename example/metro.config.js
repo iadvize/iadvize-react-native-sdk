@@ -7,7 +7,7 @@ const assetExts = require('metro-config/src/defaults/defaults').assetExts;
  * Metro configuration
  * https://facebook.github.io/metro/docs/configuration
  *
- * @type {import('metro-config').MetroConfig}
+ * @type {import('@react-native/metro-config').MetroConfig}
  */
 const config = {
   transformer: {

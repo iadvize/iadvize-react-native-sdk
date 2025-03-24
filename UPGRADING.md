@@ -1,3 +1,7 @@
+## 4.3.0 > 4.3.1
+
+*Nothing to report*
+
 ## 4.2.6 > 4.3.0
 
 **Smaller Chatbox**
