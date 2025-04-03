@@ -4,8 +4,8 @@ buildscript {
         minSdkVersion = 24
         compileSdkVersion = 35
         targetSdkVersion = 35
-        ndkVersion = "27.1.12297006"
-        kotlinVersion = "2.0.21"
+        ndkVersion = "29.0.13113456"
+        kotlinVersion = "2.1.10"
     }
     repositories {
         google()
