@@ -8,7 +8,7 @@
     "start": "react-native start"
   },
   "dependencies": {
-    "@iadvize-oss/iadvize-react-native-sdk": "^4.3.2",
+    "@iadvize-oss/iadvize-react-native-sdk": "^4.3.3",
     "react": "19.0.0",
     "react-native": "0.78.0"
   },

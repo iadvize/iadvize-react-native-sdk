@@ -1,3 +1,12 @@
+# 4.3.3 (Fourme)
+
+### Release date 2025/04/29
+
+**Bug fixes**
+
+- (Android) Fix smaller chatbox animation possibly running on background thread
+- (Android) Fix insets trying to apply on a detached view
+
 # 4.3.2 (Fourme)
 
 ### Release date 2025/04/01
