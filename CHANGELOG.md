@@ -1,15 +1,64 @@
-# 4.3.3-kotlin1 (Fourme)
+# 4.4.0 (Gaperon)
 
-### Release date 2025/04/29
+### Release date 2025/05/30
+
+**Features**
+
+The visitor targeting workflow has been simplified.
+
+You do not need to register the visitor navigation anymore.
+Thus, the method `registerUserNavigation(navigationOption)` is now deprecated.
+
+You now manage targeting using only these 2 methods:
+
+- To engage the visitor, call `activateTargetingRule(targetingRule, channel)` (as you already do).
+- To stop engaging the visitor, calls `deactivateTargetingRule()` (this is new).
+
+Between these 2 calls, the iAdvize SDK automatically updates the targeting rule availability (every 30 seconds) and updates the chat button accordingly. 
+
+If the update fails (e.g.: if there is no connection), you do not need to perform any special actions. The iAdvize SDK will try to update it again 30 seconds later.
+
+*Activating a new rule*
+
+```
+// BEFORE
+IAdvizeSDK.registerUserNavigation(NavigationOption.NEW, targetingRuleUUIDString, channel);
+
+// AFTER: simply activate the new rule
+IAdvizeSDK.activateTargetingRule(targetingRuleUUIDString, channel)
+```
+
+*Deactivating the rule*
+
+```
+// BEFORE
+IAdvizeSDK.registerUserNavigation(NavigationOption.CLEAR, "", "");
+
+// AFTER: deactivate the active rule
+IAdvizeSDK.deactivateTargetingRule()
+```
+
+*Register user navigation (new screen)*
+
+```
+// BEFORE
+IAdvizeSDK.registerUserNavigation(NavigationOption.KEEP, "", "");
+
+// AFTER: Nothing to do the SDK handles it
+```
+
+**Bug fixes**
+- (iOS) Fix rare crash in conversation (ConversationViewController.previewController(_:previewItemAt:)).
 
 **Dependencies**
 
-This version is a downgrade of 4.3.3-kotlin1 to use Kotlin 2.0, as React Native Expo 58 (latest to date)
-is not supporting Kotlin 2.1
+- Gradle `8.13` > `8.14`
+- Android Gradle Plugin `8.9.2` > `8.10.0`
+- Kotlin `2.1.10` > `2.1.20`
+- Twilio `7.6.4` > `7.8.0`
 
-- Gradle `8.10.2`
-- Android Gradle Plugin `8.6.1`
-- Kotlin `2.0.0`
+This Twilio update ensures that the SDK is now compatible with the new Android `16 KB page sizes` feature.
+https://developer.android.com/guide/practices/page-sizes
 
 # 4.3.3 (Fourme)
 
@@ -19,6 +68,12 @@ is not supporting Kotlin 2.1
 
 - (Android) Fix smaller chatbox animation possibly running on background thread
 - (Android) Fix insets trying to apply on a detached view
+
+**Dependencies**
+
+The update of `google-play-services-basement` library to version `18.7` adds the obligation to activate `coreLibraryDesugaring` inside the apps integrating the iAdvize Mobile SDK (see https://developers.google.com/android/guides/releases#april_14_2025)
+
+For more information on how to proceed, see https://developer.android.com/studio/write/java8-support#library-desugaring
 
 # 4.3.2 (Fourme)
 

@@ -1,3 +1,48 @@
+## 4.3.3 > 4.4.0
+
+The visitor targeting workflow has been simplified.
+
+You do not need to register the visitor navigation anymore.
+Thus, the method `registerUserNavigation(navigationOption)` is now deprecated.
+
+You now manage targeting using only these 2 methods:
+
+- To engage the visitor, call `activateTargetingRule(targetingRule, channel)` (as you already do).
+- To stop engaging the visitor, calls `deactivateTargetingRule()` (this is new).
+
+Between these 2 calls, the iAdvize SDK automatically updates the targeting rule availability (every 30 seconds) and updates the chat button accordingly. 
+
+If the update fails (e.g.: if there is no connection), you do not need to perform any special actions. The iAdvize SDK will try to update it again 30 seconds later.
+
+*Activating a new rule*
+
+```
+// BEFORE
+IAdvizeSDK.registerUserNavigation(NavigationOption.NEW, targetingRuleUUIDString, channel);
+
+// AFTER: simply activate the new rule
+IAdvizeSDK.activateTargetingRule(targetingRuleUUIDString, channel)
+```
+
+*Deactivating the rule*
+
+```
+// BEFORE
+IAdvizeSDK.registerUserNavigation(NavigationOption.CLEAR, "", "");
+
+// AFTER: deactivate the active rule
+IAdvizeSDK.deactivateTargetingRule()
+```
+
+*Register user navigation (new screen)*
+
+```
+// BEFORE
+IAdvizeSDK.registerUserNavigation(NavigationOption.KEEP, "", "");
+
+// AFTER: Nothing to do the SDK handles it
+```
+
 ## 4.3.2 > 4.3.3
 
 *Nothing to report*

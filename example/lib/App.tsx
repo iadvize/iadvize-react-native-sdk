@@ -66,11 +66,6 @@ export default function App() {
     }
   };
 
-  const activateTargetingRule = async () => {
-    // TODO: replace with your targetingRuleId
-    IAdvizeSDK.activateTargetingRule("targetingRuleId", ConversationChannel.CHAT);
-  };
-
   const logout = async () => {
     try {
       await IAdvizeSDK.logout();
@@ -81,8 +76,13 @@ export default function App() {
     }
   };
 
-  const registerUserNavigation = async () => {
-    IAdvizeSDK.registerUserNavigation(NavigationOption.CLEAR, "", ConversationChannel.CHAT);
+  const activateTargetingRule = async () => {
+    // TODO: replace with your targetingRuleId
+    IAdvizeSDK.activateTargetingRule("targetingRuleId", ConversationChannel.CHAT);
+  };
+
+  const deactivateTargetingRule = async () => {
+    IAdvizeSDK.deactivateTargetingRule();
   };
 
   const registerPushToken = async () => {
@@ -172,16 +172,16 @@ export default function App() {
     <View style={styles.container}>
       <Button title="Activate" onPress={() => activateSDK()} />
       <View style={styles.margin} />
+      <Button title="Logout" onPress={() => logout()} />
+      <View style={styles.margin} />
       <Button
         title="Activate Targeting Rule"
         onPress={() => activateTargetingRule()}
       />
       <View style={styles.margin} />
-      <Button title="Logout" onPress={() => logout()} />
-      <View style={styles.margin} />
       <Button
-        title="Register UserNavigation"
-        onPress={() => registerUserNavigation()}
+        title="Deactivate Targeting Rule"
+        onPress={() => deactivateTargetingRule()}
       />
       <View style={styles.margin} />
       <Button title="Register Push Notif" onPress={() => registerPushToken()} />
