@@ -1,3 +1,21 @@
+# 4.4.1 (Gaperon)
+
+### Release date 2025/07/15
+
+**Features**
+
+- Add support for AI Quick Replies
+
+**Bug fixes**
+
+- (iOS) Fix targeting polling not being disabled during conversation.
+
+**Dependencies**
+
+- React Native `0.79.2` > `0.80.1`
+- React `19.0.0` > `19.1.0`
+- Android Gradle Plugin `8.10.0` > `8.10.1`
+
 # 4.4.0 (Gaperon)
 
 ### Release date 2025/05/30
