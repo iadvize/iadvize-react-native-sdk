@@ -10,7 +10,11 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.iadvize.expotestidz"
+      "bundleIdentifier": "com.iadvize.expotestidz",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This application will use the camera to share photos and during video calls.",
+        "NSMicrophoneUsageDescription": "This application will use the microphone during video calls."
+      }
     },
     "android": {
       "adaptiveIcon": {
