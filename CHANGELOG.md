@@ -1,3 +1,11 @@
+# 4.4.3 (Gaperon)
+
+### Release date 2025/09/18
+
+**Dependencies**
+
+- (Android) Fix iAdvize Mobile SDK repository URL
+
 # 4.4.2 (Gaperon)
 
 ### Release date 2025/09/12

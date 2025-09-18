@@ -1,3 +1,11 @@
+## 4.4.2 > 4.4.3
+
+In your Android project, if you reference the iAdvize Android SDK repository, be sure to update the URL to the following:
+
+```
+maven { url "https://raw.githubusercontent.com/iadvize/iadvize-android-sdk/master" }
+```
+
 ## 4.4.1 > 4.4.2
 
 *Nothing to report*
