@@ -3,7 +3,7 @@ const { withAppBuildGradle, withProjectBuildGradle, withMainApplication } = requ
 function addIAdvizeRepository(inputString, language) {
   // Insert the import statement right before the line containing " maven { url 'https://www.jitpack.io' }"
   const lineIndex = findLineIndex(inputString, "maven { url 'https://www.jitpack.io' }");
-  const repoImport = "        maven { url 'https://raw.github.com/iadvize/iadvize-android-sdk/master' }";
+  const repoImport = "        maven { url 'https://raw.githubusercontent.com/iadvize/iadvize-android-sdk/master' }";
   return insertLine(inputString, `${repoImport}`, lineIndex);
 }
 
