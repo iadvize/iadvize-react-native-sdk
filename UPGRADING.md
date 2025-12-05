@@ -1,3 +1,7 @@
+## 4.4.3 > 4.4.4
+
+*Nothing to report*
+
 ## 4.4.2 > 4.4.3
 
 In your Android project, if you reference the iAdvize Android SDK repository, be sure to update the URL to the following:

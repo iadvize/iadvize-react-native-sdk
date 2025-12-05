@@ -1,3 +1,21 @@
+# 4.4.4 (Gaperon)
+
+### Release date 2025/12/05
+
+**Features**
+
+- Add Romanian localization.
+- (iOS) The chatbox is now automatically dismissed at the end of the satisfaction survey.
+
+**Bug fixes**
+
+- (iOS) Fix missing "0" choice for NPS in satisfaction survey.
+
+**Dependencies**
+
+- Android Gradle Plugin `8.12.2` > `8.13.0`
+- Kotlin `2.2.10` > `2.2.20`
+
 # 4.4.3 (Gaperon)
 
 ### Release date 2025/09/18
