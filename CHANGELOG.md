@@ -1,3 +1,11 @@
+# 4.4.5 (Gaperon)
+
+### Release date 2026/01/27
+
+**Bug fixes**
+
+- Update romanian localization
+
 # 4.4.4 (Gaperon)
 
 ### Release date 2025/12/05
