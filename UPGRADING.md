@@ -1,3 +1,7 @@
+## 4.4.5 > 4.4.6
+
+*Nothing to report*
+
 ## 4.4.4 > 4.4.5
 
 *Nothing to report*

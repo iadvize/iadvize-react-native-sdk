@@ -1,3 +1,12 @@
+# 4.4.6 (Gaperon)
+
+### Release date 2026/02/05
+
+**Bug fixes**
+
+- Fix missing action or wrong text when taping on a card message
+- (iOS) Fix rare crash in InternalOngoingConversation
+
 # 4.4.5 (Gaperon)
 
 ### Release date 2026/01/27
