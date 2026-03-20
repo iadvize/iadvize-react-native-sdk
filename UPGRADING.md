@@ -1,3 +1,55 @@
+## 4.4.6 > 5.0.0-beta1
+
+### New `ChatboxConfiguration` APIs
+
+This major new version includes a completely new chat interface, offering a cleaner, more intuitive
+interface to your visitors. Consequently, the APIs of `ChatboxConfiguration` have evolved.
+
+- `navigationBarBackgroundColor` is removed. The navigation bar of the Chatbox now uses the background
+  color set by the system/app.
+- `navigationBarMainColor` is removed. The elements in the navigation bar of the Chatbox now use the color
+  set by the system/app.
+- `navigationBarTitle` is renamed to `title`.
+- `incomingMessageAvatarImageName` is replaced by `avatar`. The `avatar` you define is displayed
+  in the navigation bar of the Chatbox, above the `title`. There is no avatar displayed next
+  to incoming messages anymore.
+- `incomingMessageAvatarURL` is removed. Use `avatar` instead.
+- `incomingMessageBackgroundColor` is removed. Incoming messages now always have the same background
+  color. It is not customizable.
+- `incomingMessageTextColor` is removed. Incoming messages now always the same text color. It is not
+  customizable.
+- `incomingMessageBorderColor` is removed. Incoming messages cannot have borders anymore.
+- `outgoingMessageBackgroundColor` is removed. Use the new `primaryColor` to customize the outgoing
+  messages background color.
+- `outgoingMessageTextColor` is removed. Use the new `primaryTextColor` to customize the outgoing
+  messages text color.
+- `outgoingMessageBorderColor` is removed. Outgoing messages cannot have borders anymore.
+- `accentColor` is removed. Use the new `secondaryColor` and `secondaryTextColor` to customize the
+  colors of some elements such as the Send button and other buttons displayed in the Chatbox.
+- `smallerChatboxEnabled` is ignored on Android.
+- `fontName` is renamed to `iosFontName`
+- `fontSize` is renamed to `iosFontSize`
+- `fontPath` is renamed to `androidFontPath`
+
+### Removal of video conversations
+
+This version removes support for video conversations. Only chat conversations are supported. As a
+consequence, you do not need to specify the `ConversationChannel` anymore when creating a targeting
+rule.
+
+- `activateTargetingRule(uuid: string, conversationChannel: ConversationChannel): void` is replaced by `activateTargetingRule(uuid: string): void;`.
+- `ConversationChannel` is removed.
+- `ongoingConversationChannel()` is removed.
+
+### Removal of deprecated targeting APIs
+
+The following APIs were deprecated in previous versions. This version completely removes them.
+
+- `registerUserNavigation()` is removed.
+- `NavigationOption` is removed.
+
+Check [4.3.3 > 4.4.0](#4.3.3->-4.4.0) below for guidance on how to replace these APIs.
+
 ## 4.4.5 > 4.4.6
 
 *Nothing to report*

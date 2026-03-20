@@ -10,7 +10,7 @@ npx expo install --fix
 
 ```
 npx expo install expo-build-properties
-npx expo install @iadvize-oss/iadvize-react-native-sdk@4.3.3-kotlin1
+npx expo install @iadvize-oss/iadvize-react-native-sdk@5.0.0
 ```
 
 ### 3. Configure iAdvize SDK properties via `expo-build-properties` in `app.json`
@@ -24,8 +24,7 @@ npx expo install @iadvize-oss/iadvize-react-native-sdk@4.3.3-kotlin1
       ...
 
       "infoPlist": {
-        "NSCameraUsageDescription": "This application will use the camera to share photos and during video calls.",
-        "NSMicrophoneUsageDescription": "This application will use the microphone during video calls."
+        "NSCameraUsageDescription": "This application will use the camera to share photos."
       }
     },
     "plugins": [
@@ -35,9 +34,9 @@ npx expo install @iadvize-oss/iadvize-react-native-sdk@4.3.3-kotlin1
         "expo-build-properties",
         {
           "android": {
-            "compileSdkVersion": 35,
-            "targetSdkVersion": 35,
-            "buildToolsVersion": "35.0.0",
+            "compileSdkVersion": 36,
+            "targetSdkVersion": 36,
+            "buildToolsVersion": "36.0.0",
             "minSdkVersion": 24
           },
           "ios": {

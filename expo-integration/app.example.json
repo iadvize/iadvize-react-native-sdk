@@ -12,8 +12,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.iadvize.expotestidz",
       "infoPlist": {
-        "NSCameraUsageDescription": "This application will use the camera to share photos and during video calls.",
-        "NSMicrophoneUsageDescription": "This application will use the microphone during video calls."
+        "NSCameraUsageDescription": "This application will use the camera to share photos."
       }
     },
     "android": {
@@ -43,9 +42,9 @@
         "expo-build-properties",
         {
           "android": {
-            "compileSdkVersion": 35,
-            "targetSdkVersion": 35,
-            "buildToolsVersion": "35.0.0",
+            "compileSdkVersion": 36,
+            "targetSdkVersion": 36,
+            "buildToolsVersion": "36.0.0",
             "minSdkVersion": 24
           },
           "ios": {

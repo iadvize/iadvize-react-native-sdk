@@ -1,19 +1,38 @@
 import * as React from 'react';
 
-import { StyleSheet, Image, Linking, View, Button } from 'react-native';
+import { Button, Image, Linking, StyleSheet, View } from 'react-native';
 import IAdvizeSDK, {
   IAdvizeSDKListeners,
   LogLevel,
   ApplicationMode,
   ChatboxConfiguration,
-  Transaction,
-  ConversationChannel,
-  NavigationOption,
+  Transaction
 } from '@iadvize-oss/iadvize-react-native-sdk';
+
+// TODO replace with your own values
+const projectId = -1
+const userId = "userId"
+const targetingRuleId = "targetingRuleId"
+const customChatboxConfiguration: ChatboxConfiguration = {
+  iosFontName: 'AmericanTypewriter-Condensed',
+  iosFontSize: 11,
+  androidFontPath: 'fonts/comicneue_regular.ttf',
+
+  primaryColor: '#0B08D9',
+  primaryTextColor: '#FFFFFF',
+  secondaryColor: '#F39600',
+  secondaryTextColor: '#3D3D38',
+
+  title: 'Custom Header Title',
+  avatar: Image.resolveAssetSource(require('./header.png')).uri,
+
+  automaticMessage: 'Hello! Please ask your question :)',
+  gdprMessage: 'Your own custom GDPR message.'
+};
 
 export default function App() {
   React.useEffect(() => {
-    IAdvizeSDK.setLanguage('fr');
+    IAdvizeSDK.setLanguage('en');
     IAdvizeSDK.setLogLevel(LogLevel.VERBOSE);
     IAdvizeSDK.setDefaultFloatingButton(true);
     IAdvizeSDK.setFloatingButtonPosition(25, 25);
@@ -57,8 +76,7 @@ export default function App() {
 
   const activateSDK = async () => {
     try {
-      // TODO: replace with your projectId / userId
-      await IAdvizeSDK.activate(-1, "userId", null);
+      await IAdvizeSDK.activate(projectId, userId, null);
       console.log('iAdvize SDK activated');
     } catch (e) {
       console.log('iAdvize SDK not activated');
@@ -77,8 +95,7 @@ export default function App() {
   };
 
   const activateTargetingRule = async () => {
-    // TODO: replace with your targetingRuleId
-    IAdvizeSDK.activateTargetingRule("targetingRuleId", ConversationChannel.CHAT);
+    IAdvizeSDK.activateTargetingRule(targetingRuleId);
   };
 
   const deactivateTargetingRule = async () => {
@@ -110,27 +127,7 @@ export default function App() {
   };
 
   const setChatboxConfiguration = async () => {
-    const configuration: ChatboxConfiguration = {
-      fontName: 'AmericanTypewriter-Condensed',
-      fontSize: 11,
-      fontPath: '/',
-
-      incomingMessageBackgroundColor: '#EEEFF0',
-      incomingMessageTextColor: '#34393F',
-      outgoingMessageBackgroundColor: '#320087',
-      outgoingMessageTextColor: '#EEEFF0',
-      accentColor: '#FFBF32',
-
-      navigationBarBackgroundColor: '#FFBF32',
-      navigationBarMainColor: '#320087',
-      navigationBarTitle: 'Toolbar custom title',
-
-      automaticMessage: 'Hello! Please ask your question :)',
-      gdprMessage: 'Your own custom GDPR message.',
-      incomingMessageAvatarImageName: Image.resolveAssetSource(require('./test.jpeg')).uri, // Will take precedence over AvatarURL
-      incomingMessageAvatarURL: 'https://picsum.photos/200/200',
-    };
-    IAdvizeSDK.setChatboxConfiguration(configuration);
+    IAdvizeSDK.setChatboxConfiguration(customChatboxConfiguration);
   };
 
   const registerTransaction = async () => {
@@ -145,10 +142,9 @@ export default function App() {
   const registerCustomData = async () => {
     // String Key - Values can be String/Int/Double/Boolean
     var customData = {
-      "Test": "Test",
-      "Test2": false,
-      "Test3": 2.5,
-      "Test4": 3
+      "android-device-version": 33,
+      "iadvize-sdk-version": "3.4.5",
+      "random-number": 3.14
     };
     IAdvizeSDK.registerCustomData(customData);
   };
@@ -156,11 +152,6 @@ export default function App() {
   const ongoingConversationId = async () => {
     const convId = IAdvizeSDK.ongoingConversationId();
     console.log(`iAdvize SDK conversationId: ${ convId }`);
-  };
-
-  const ongoingConversationChannel = async () => {
-    const convChannel = IAdvizeSDK.ongoingConversationChannel();
-    console.log(`iAdvize SDK conversationChannel: ${ convChannel }`);
   };
 
   const debugInfo = async () => {
@@ -214,11 +205,6 @@ export default function App() {
       <Button
         title="Print Conversation Id"
         onPress={() => ongoingConversationId()}
-      />
-      <View style={styles.margin} />
-      <Button
-        title="Print Conversation Channel"
-        onPress={() => ongoingConversationChannel()}
       />
       <View style={styles.margin} />
       <Button
