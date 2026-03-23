@@ -1,4 +1,4 @@
-## 4.4.6 > 5.0.0-beta1
+## 4.4.6 > 5.0.0
 
 ### New `ChatboxConfiguration` APIs
 

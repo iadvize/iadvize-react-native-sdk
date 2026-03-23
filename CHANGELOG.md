@@ -1,3 +1,25 @@
+# 5.0.0 (Herbillette)
+
+### Release date 2026/03/23
+
+**Features**
+
+- This major new version includes a completely new chat interface, offering a cleaner, more
+  intuitive interface for your visitors. Consequently, the API of `ChatboxConfiguration` has
+  evolved. Check [UPGRADING.md](./UPGRADING.md) for more information.
+
+**Dependencies**
+
+- This version removes support for video conversations, thereby eliminating the dependency on the
+  Twilio Video library, which reduces the size of the SDK included in your app. This also removes
+  the need to specify the `ConversationChannel`. Check [UPGRADING.md](./UPGRADING.md) for more
+  information.
+
+- React Native `0.81.4` > `0.84.1`
+- React `19.1.0` > `19.2.3`
+- Android Gradle Plugin `8.13.0` > `8.13.2`
+- Kotlin `2.2.20` > `2.2.21`
+
 # 5.0.0-beta1 (Herbillette)
 
 ### Release date 2026/03/20

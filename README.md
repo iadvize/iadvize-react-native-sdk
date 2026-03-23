@@ -1,26 +1,16 @@
-<img src="https://user-images.githubusercontent.com/17723986/47799626-f3982700-dd2a-11e8-983c-77d1a3ed7f53.png" width="280" height="96" alt="iAdvize">
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./iAdvize_logo_dark.png">
+    <img alt="iAdvize Logo" src="./iAdvize_logo_light.png" width="400">
+  </picture>
+</p>
 
-# iAdvize ReactNative SDK Plugin
+# iAdvize React Native SDK
 
-Take your app to the next level and provide a **unique conversational experience** to your users!
+Take your app to the next level and provide a **unique conversational shopping experience** to your users!
 
-Embed the iAdvize Mobile SDK into your app and connect your visitors with your professional agents or ibbü experts through a **fully customized chat experience**. Visitors can ask a question and will receive answers directly on their devices.
-
-## Compatibility
-
-The iAdvize ReactNative SDK Plugin uses the iAdvize native iOS & Android SDKs.
-
-| Plugin      | React Native | React  | Android SDK      | Android  | Kotlin | iOS SDK       | iOS  | Xcode  | Swift |
-| ----------- | ------------ | ------ | ---------------- | -------- | ------ | ------------- | ---- | ------ | ----- |
-| 5.0.0-beta1 | 0.84.1       | 19.2.3 | 3.0.0-beta3      | 24 -> 36 | 2.2.21 | 3.0.0-beta2   | 13.4 | 26.x   | 5/6   |
-| 4.4.6       | 0.81.4       | 19.1.0 | 2.16.7.          | 24 -> 36 | 2.2.20 | 2.18.5.       | 13.4 | 26.x   | 5/6   |
-| 4.4.5       | 0.81.4       | 19.1.0 | 2.16.6.          | 24 -> 36 | 2.2.20 | 2.18.4.       | 13.4 | 26.x   | 5/6   |
-| 4.4.4       | 0.81.4       | 19.1.0 | 2.16.5.          | 24 -> 36 | 2.2.20 | 2.18.3.       | 13.4 | 26.x   | 5/6   |
-| 4.4.3       | 0.81.4       | 19.1.0 | 2.16.4.          | 24 -> 36 | 2.2.10 | 2.18.2.       | 13.4 | 16.x   | 5/6   |
-| 4.4.2       | 0.81.4       | 19.1.0 | 2.16.4.          | 24 -> 36 | 2.2.10 | 2.18.2.       | 13.4 | 16.x   | 5/6   |
-| 4.4.1       | 0.80.1       | 19.1.0 | 2.16.1.          | 24 -> 35 | 2.1.20 | 2.18.1.       | 13.4 | 16.x   | 5/6   |
-| 4.4.0       | 0.79.2       | 19.0.0 | 2.16.0.          | 24 -> 35 | 2.1.20 | 2.18.0.       | 13.4 | 16.x   | 5/6   |
+Embed the iAdvize Mobile SDK into your app to give your visitors instant access to our **AI Shopping Assistant and professional agents**. Assist shoppers throughout their buying journey – answering product questions, finding relevant products, and helping them make buying decisions with more confidence – all through a **fully customized chat experience**, directly on their devices.
 
 ## Integration
 
-A step-by-step integration guide of the iAdvize Messenger SDK is available on our [Developer Platform](https://developers.iadvize.com/documentation/mobile-sdk).
+A step-by-step integration guide of the iAdvize Mobile SDK is available on our [Developer Platform](https://developers.iadvize.com/documentation/mobile-sdk).
