@@ -1,3 +1,7 @@
+## 5.0.0 > 5.1.0
+
+*Nothing to report*
+
 ## 4.4.6 > 5.0.0
 
 ### New `ChatboxConfiguration` APIs
