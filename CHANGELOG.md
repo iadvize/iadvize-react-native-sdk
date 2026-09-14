@@ -1,3 +1,44 @@
+# 5.2.0 (Jonchée)
+
+### Release date 2026/09/14
+
+**Features**
+
+- **Add-To-Cart**. The Add-To-Cart feature allows visitors to add a product directly to their cart from a conversation with the Assistant. Its goal: to simplify the shopping experience without leaving the chat, by reducing frictions linked to traditional navigation.
+  - The Assistant recommends products to the visitor.
+  - The visitor clicks on "Add to cart" without leaving the conversation.
+  - The product is immediately added to the cart on your e-commerce website.
+  - A confirmation message is displayed in the conversation.
+- **Scroll-to-bottom button**. When the conversation is not scrolled to bottom, a button appears to quickly reach the bottom of the conversation.
+- Exposed the SDK activation status. `IAdvizeSDK.activationStatus()`
+- Typed the whole JavaScript API. Listener payloads, custom data and push notification payloads are no longer `any`, and every method carries documentation your editor can show. Callbacks written against the previous `any` signatures keep compiling.
+
+**Bug fixes**
+
+- Fixed the published `types` entry point. `package.json` pointed at `lib/typescript/index.d.ts` while the declarations were emitted under `lib/typescript/src/`, so TypeScript consumers got no types for the plugin.
+- Fixed the `ChatboxConfiguration` secondary color, which never reached the native SDKs: the field was declared as `secondaryolor` while both bridges read `secondaryColor`. See `UPGRADING.md`.
+- Fixed `ongoingConversationId()` on iOS, which returned `null` with no ongoing conversation while Android returned an empty string and the type promised a string. It now returns an empty string on both platforms.
+- (Android) Fixed conversation history loss after consecutive logouts.
+- (iOS) Fixed a display issue that sometimes affected streamed messages.
+
+**Dependencies**
+
+This version moves to React Native 0.87 and requires Android Gradle Plugin 9 — see `UPGRADING.md` for the two `gradle.properties` flags you need to add and the exact toolchain floors.
+
+- React Native `0.85.3` > `0.87.1`
+- React `19.2.3` (unchanged — 0.87.1 ships the same version)
+- Node minimum `22.11.0` > `22.13.0`
+- React Native Community CLI `20.1.0` > `20.2.0`
+- Android Gradle Plugin `8.13.2` > `9.2.1`
+- Gradle `9.3.1` > `9.4.1`
+- Android Compile SDK `36` > `37`, Build Tools `36.0.0` > `37.0.0`
+- Kotlin `2.2.21` > `2.2.0` (aligned with the React Native 0.87 template)
+- TypeScript `5.8.3` > `6.0.3`
+- react-native-builder-bob `0.37.0` > `0.43.0`
+- react-native-safe-area-context `5.5.2` > `5.9.1`
+- Glide `5.0.5` > `5.0.9`
+- Minimum iOS version `13.4` > `15.0`. The podspec still declared 13.4 while the native iOS SDK has required iOS 15 since 3.0.0. React Native 0.87 already builds against 15.1, so nothing changes for a project generated from its template.
+
 # 5.1.0 (Immanente)
 
 ### Release date 2026/06/08

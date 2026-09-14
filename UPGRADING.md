@@ -1,3 +1,77 @@
+## 5.1.0 > 5.2.0
+
+### React Native 0.87 is now required
+
+This version moves to React Native 0.87, which raises the Android build toolchain. Your app needs:
+
+- **React Native 0.87 or higher.** The plugin is built and tested against 0.87.1.
+- **Node 22.13.0 or higher**, React Native 0.87's own floor.
+- **Android Gradle Plugin 9.** Add the two transitional opt-outs React Native documents for AGP 9 to your `android/gradle.properties`, otherwise the build fails on the `kotlin-android` plugin that this plugin and much of the ecosystem still apply:
+
+  ```properties
+  android.builtInKotlin=false
+  android.newDsl=false
+  ```
+
+  Both are removed in AGP 10.
+- **Gradle 9.4.1 or higher**, AGP 9.2's minimum.
+- **`compileSdk` 37 and Build Tools 37.0.0.** These are the React Native 0.87 template defaults, so a project generated from it needs no change.
+- **JDK 17**, unchanged.
+- **iOS 15.0 or higher.** The podspec previously declared 13.4, which was wrong: the native iOS SDK has required iOS 15 since 3.0.0. React Native 0.87 builds against 15.1, so a project generated from its template needs no change.
+- **Android** `minSdk` stays 24 and `targetSdk` stays 36.
+
+If you are still on React Native 0.86 or older, stay on plugin 5.1.0.
+
+### Add to cart
+
+Visitors can now add a recommended product to their cart from the conversation. It is opt-in: register a handler and the "Add to cart" button appears on the product cards the Shopping Assistant recommends, in place of the actions they carry otherwise.
+
+```ts
+IAdvizeSDKListeners.onAddToCartRequested(async ({ productId }) => {
+  await myCart.add(productId); // throw if you could not add it
+});
+```
+
+Resolve and the SDK confirms it in the conversation, so the assistant can pick the thread back up. `productId` is the identifier from your product catalog. When a product has several variants the SDK asks the visitor to pick one first and hands you the variant's identifier, not the parent's.
+
+Three things to know:
+
+- **The promise has to settle.** One that never does leaves the button spinning until you unregister the handler or the app reloads.
+- **Do not depend on JS timers on Android, and that includes `fetch`.** The chatbox is its own activity there, so the activity hosting React Native is paused for as long as the visitor is in the conversation, and React Native stops running `setTimeout` and `setInterval` callbacks while it is. Anything waiting on one only settles once the visitor leaves the conversation, and the button spins until then.
+
+  `fetch` is the one that catches people out: React Native polyfills it with `whatwg-fetch`, which
+  resolves its promise from a `setTimeout(0)`. The HTTP request is sent and the response arrives, but
+  the promise stays pending until the visitor closes the chatbox. Debounce, retry and client-side
+  timeout helpers are usually timer-based too.
+
+  `XMLHttpRequest` works, and so does anything built on it — axios included — as do promises returned
+  by native modules, promise chains and microtasks. So call your cart backend with axios, or with a
+  plain `XMLHttpRequest`:
+
+  ```ts
+  IAdvizeSDKListeners.onAddToCartRequested(
+    ({ productId }) =>
+      new Promise<void>((resolve, reject) => {
+        const request = new XMLHttpRequest();
+        request.open('POST', 'https://example.com/cart');
+        request.onload = () =>
+          request.status < 400 ? resolve() : reject(new Error(`Cart returned ${request.status}`));
+        request.onerror = () => reject(new Error('Cart unreachable'));
+        request.send(JSON.stringify({ productId }));
+      })
+  );
+  ```
+
+### TypeScript types now match what the native SDKs accept
+
+The types were hand-written and had drifted from the native code. Three of them were wrong:
+
+- **`ChatboxConfiguration.secondaryolor` is now `secondaryColor`.** The misspelled field never reached the native SDKs, so the secondary color was silently ignored for anyone who followed the type. Rename it in your configuration object and the color applies.
+- **`activate` accepts `null` for `userId` and `gdprURL`.** Both were typed as required strings while the native SDKs already read a null `userId` as an anonymous visitor and a null `gdprURL` as GDPR consent disabled. Nothing to change if you pass real strings.
+- **`ongoingConversationId()` returns an empty string on iOS when there is no ongoing conversation**, like Android already did, instead of `null`. If you were testing the result against `null`, test it against `''`.
+
+Listener payloads are typed too: `onNewMessageReceived` gives you `{ content: string }`, `handleClickedUrl` gives you `{ uri: string }`, and so on, instead of `any`. Callbacks you already declared as `(event: any) => void` keep compiling. Same for `registerCustomData`, now `Record<string, string | number | boolean>` — the value types the native SDKs actually read, anything else was being dropped silently.
+
 ## 5.0.0 > 5.1.0
 
 *Nothing to report*

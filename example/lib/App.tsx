@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Button, Image, Linking, StyleSheet, View } from 'react-native';
 import IAdvizeSDK, {
   IAdvizeSDKListeners,
+  ActivationStatus,
   LogLevel,
   ApplicationMode,
   ChatboxConfiguration,
@@ -24,13 +25,15 @@ const customChatboxConfiguration: ChatboxConfiguration = {
   secondaryTextColor: '#3D3D38',
 
   title: 'Custom Header Title',
-  avatar: Image.resolveAssetSource(require('./header.png')).uri,
+  avatar: Image.resolveAssetSource(require('./header.png'))?.uri,
 
   automaticMessage: 'Hello! Please ask your question :)',
   gdprMessage: 'Your own custom GDPR message.'
 };
 
 export default function App() {
+  const [failAddToCart, setFailAddToCart] = React.useState(false);
+
   React.useEffect(() => {
     IAdvizeSDK.setLanguage('en');
     IAdvizeSDK.setLogLevel(LogLevel.VERBOSE);
@@ -73,6 +76,29 @@ export default function App() {
     });
 
   }, []);
+
+  // Registering a handler makes the "Add to cart" button appear on the product
+  // cards the Shopping Assistant recommends. Its own effect, keyed on
+  // failAddToCart, so that toggling the switch below replaces the handler.
+  React.useEffect(() => {
+    IAdvizeSDKListeners.onAddToCartRequested(async function (eventData) {
+      console.log('onAddToCartRequested', eventData);
+
+      // Add the product to your own cart here. Returning tells the SDK the
+      // product was added, throwing tells it the product was not. The button on
+      // the product card spins until then.
+
+      // Beware that on Android, React Native stops running JS timers while SDK is in foreground
+      // So using `fetch` or `setTimeout()` would stay stuck until the chatbox is closed
+      // Use `axios` (or native `XMLHttpRequest`) instead.
+
+      if (failAddToCart) {
+        throw new Error('Cart backend unavailable');
+      }
+
+      console.log('Added product to the cart:', eventData.productId);
+    });
+  }, [failAddToCart]);
 
   const activateSDK = async () => {
     try {
@@ -154,6 +180,11 @@ export default function App() {
     console.log(`iAdvize SDK conversationId: ${ convId }`);
   };
 
+  const activationStatus = async () => {
+    const status = IAdvizeSDK.activationStatus();
+    console.log(`iAdvize SDK activation status: ${ status }, activated: ${ status === ActivationStatus.ACTIVATED }`);
+  };
+
   const debugInfo = async () => {
     const debugInfo = IAdvizeSDK.debugInfo();
     console.log(`Debug info: ${ debugInfo }`);
@@ -205,6 +236,21 @@ export default function App() {
       <Button
         title="Print Conversation Id"
         onPress={() => ongoingConversationId()}
+      />
+      <View style={styles.margin} />
+      <Button
+        title={`Add to cart: ${failAddToCart ? 'fail' : 'succeed'}`}
+        onPress={() => setFailAddToCart(!failAddToCart)}
+      />
+      <View style={styles.margin} />
+      <Button
+        title="Unset Add To Cart Handler"
+        onPress={() => IAdvizeSDKListeners.unsetAddToCartHandler()}
+      />
+      <View style={styles.margin} />
+      <Button
+        title="Print Activation Status"
+        onPress={() => activationStatus()}
       />
       <View style={styles.margin} />
       <Button

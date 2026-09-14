@@ -1,0 +1,14 @@
+{
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "types": [],
+    "paths": {
+      // Type-check against the plugin sources when they sit next to this app, so
+      // an API change breaks here before it can reach a published version. In the
+      // public repository that path does not exist and TypeScript falls back to
+      // the declarations shipped with the NPM package.
+      "@iadvize-oss/iadvize-react-native-sdk": ["../../plugin/src/index"]
+    }
+  },
+  "include": ["lib", "index.js"]
+}
