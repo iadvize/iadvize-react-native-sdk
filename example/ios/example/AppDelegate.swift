@@ -9,6 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var reactNativeDelegate: ReactNativeDelegate?
   var reactNativeFactory: RCTReactNativeFactory?
+  var launchOptions: [UIApplication.LaunchOptionsKey: Any]?
 
   func application(
     _ application: UIApplication,
@@ -21,13 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     reactNativeDelegate = delegate
     reactNativeFactory = factory
 
-    window = UIWindow(frame: UIScreen.main.bounds)
-
-    factory.startReactNative(
-      withModuleName: "example",
-      in: window,
-      launchOptions: launchOptions
-    )
+    // The window is created and React Native started from SceneDelegate: the iOS 26 SDK (Xcode 27)
+    // makes the UIScene life cycle mandatory. Stash launchOptions for the scene to consume.
+    self.launchOptions = launchOptions
 
     return true
   }
